@@ -10,4 +10,6 @@ public interface TestMapper {
 	public List<Map<String, Object>> getListById(Map<String, Object> map);
 	
 	public List<Map<String, Object>> getListByNmae(Map<String, Object> map);
+	
+	public List<Map<String, Object>> getListByIdAndName(Map<String, Object> map);
 }
