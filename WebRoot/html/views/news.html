@@ -92,21 +92,12 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<tr>
-												<td width="20%">标题</td>
-												<td width="10%">时间</td>
-												<td width="55%">内容</td>
-												<td width="15%">
-													<a class="btn" onclick="openedt('修改公告');">修改</a>&nbsp;&nbsp;
-													<a class="btn" onclick="opendel();">删除</a>
-												</td>
-											</tr>
 										</tbody>
 									</table>
 									<div id="page" class="tr"></div>
 								</div>
 							</div>
-
+							<!-- 添加的model -->
 							<div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -117,31 +108,31 @@
 										<div class="control-group">
 											<label class="control-label" for="title">标题</label>
 											<div class="controls">
-												<input type="text" name="notice.title" placeholder="新闻公告主题">
+												<input type="text" name="notice.title" placeholder="新闻公告主题" id="title">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="date">时间</label>
 											<div class="controls">
-												<input type="text" id="date" name="notice.date" placeholder="">
+												<input type="text" id="date" name="notice.date" placeholder="" >
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="contents">内容</label>
 											<div class="controls">
-												<textarea name="notice.contents" style="height:200px;width:205px;resize: none;"></textarea>
+												<textarea name="notice.contents" style="height:200px;width:205px;resize: none;" id="content"></textarea>
 											</div>
 										</div>
 									</form>
 								</div>
-								
 								<div class="modal-footer">
-									<button class="btn btn-primary" id="add" onclick="addnews();">保存</button>
-									<button class="btn btn-primary" id="edt" onclick="edtnews();">保存</button>
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn btn-primary" id="add">保存</button>
+									<button class="btn btn-primary" id="edt">保存</button>
+									<button class="btn" data-dismiss="modal" aria-hidden="true" id="closeBtn">关闭</button>
 								</div>
 							</div>
 							
+							<!-- admin model -->
 							<div id="adminModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 25%;">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -170,6 +161,7 @@
 								</div>
 							</div>
 							
+							<!-- 删除的model -->
 							<div id="delModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 25%;">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -191,11 +183,33 @@
 		<script src="../scripts/jquery-3.0.0.min.js"></script>
 		<script src="../scripts/behind.js"></script>
 		<script src="../laydate.dev.js"></script>
+		
+		<script type="text/javascript" src="../../js/util/main.js"></script>
+		<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
+		<script type="text/javascript" src="../../js/news/news.js"></script>
+		
+		
 		<script type="text/javascript">
 			laydate({
 				elem: '#date'
 			});
 		</script>
+		
+		<!-- handlebars 遍历表格内容 -->
+		<script id="newsListBean" type="text/x-handlebars-template">
+			{{#each rows}}
+				<tr>	
+					<td width="20%" newsId={{id}}>{{title}}</td>
+					<td width="10%">{{createTime}}</td>
+					<td width="55%">{{content}}</td>
+					<td width="15%">
+					<a class="btn" onclick="openedt('修改公告');">修改</a>&nbsp;&nbsp;
+					<a class="btn" onclick="opendel();">删除</a>
+					</td>
+				</tr>
+			{{/each}}
+		</script>
+		
 	</body>
 
 </html>
