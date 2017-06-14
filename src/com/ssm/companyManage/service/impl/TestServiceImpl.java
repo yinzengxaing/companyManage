@@ -17,9 +17,11 @@ public class TestServiceImpl implements TestService {
 	@Resource
 	private TestMapper testMapper;
 	public void getList(InputObject inputObject, OutputObject outputObject) throws Exception {
+		
 		Map<String, Object> params = inputObject.getParams();
 		List<Map<String, Object>> list = testMapper.getList(params);
 		outputObject.setBeans(list);
+		outputObject.settotal(list.size());
 	}
 
 }
