@@ -160,7 +160,6 @@
 									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 								</div>
 							</div>
-							
 							<!-- 删除的model -->
 							<div id="delModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 25%;">
 								<div class="modal-header">
@@ -168,8 +167,8 @@
 									<h4 align="center">确认删除吗？</h4>
 								</div>
 								<div class="modal-del-footer"><br>
-									<button class="btn btn-primary" id="del" onclick="delnews();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn btn-primary" id="del">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="btn" data-dismiss="modal" aria-hidden="true" id="closeBtn02">关闭</button>
 								</div>
 							</div>
 							
@@ -199,12 +198,12 @@
 		<script id="newsListBean" type="text/x-handlebars-template">
 			{{#each rows}}
 				<tr>	
-					<td width="20%" newsId={{id}}>{{title}}</td>
+					<td width="20%" id= >{{title}}</td>
 					<td width="10%">{{createTime}}</td>
 					<td width="55%">{{content}}</td>
 					<td width="15%">
-					<a class="btn" onclick="openedt('修改公告');">修改</a>&nbsp;&nbsp;
-					<a class="btn" onclick="opendel();">删除</a>
+					<a class="btn" onclick="openedt('修改公告'); edtId="{{id}}" ">修改</a>&nbsp;&nbsp;
+					<a class="btn" id="delBtn" delId="{{id}}">删除</a>
 					</td>
 				</tr>
 			{{/each}}
