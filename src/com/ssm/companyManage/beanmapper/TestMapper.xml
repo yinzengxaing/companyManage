@@ -4,7 +4,7 @@
 <mapper namespace="com.ssm.companyManage.dao.TestMapper">
 
 	<select id="getList" resultType="java.util.Map" parameterType="java.util.Map">
-		select * from test  	
+		select * from test	  	
 		<if test="name != null and name != '' ">
 			where  name = #{name}
 		</if>

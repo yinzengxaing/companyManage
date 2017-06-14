@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.companyManage.dao.CompanyNewsMapper">
+	<!-- 查询newsList -->
+	<select id="getNewsList" resultType="java.util.Map" parameterMap="java.util.Map">
+		SELECT
+			id,
+			title,
+			content,
+			createTime,
+			createId,
+			newsState
+		FROM
+			company_news
+		<where>
+			newsState = 1
+			<if test="title != null and title != '' ">
+				AND title LIKE '%${title}%'  
+			</if>
+		</where>
+		ORDER BY
+			createTime DESC
+	</select>	
+	<!-- 根据id 获取一条新闻 -->
+	<select id="getNewsById" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			id,
+			title,
+			content,
+			createTime,
+			createId,
+			newsState
+		FROM
+			company_news
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 根据标题名称获取一条新闻 -->
+	<select id="getNewsByTitle" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			id,
+			title,
+			content,
+			createTime,
+			createId,
+			newsState
+		FROM
+			company_news
+		<where>
+				newsState = 1
+			AND
+				title = #{title}
+		</where>
+	</select>
+	
+	<!-- 增加一条新闻 -->
+	<insert id="addNews" parameterType="java.util.Map">
+		INSERT INTO company_news (
+			title,
+			content,
+			createTime,
+			createId
+		)
+		VALUES (
+			#{title},
+			#{content},
+			#{createTime},
+			#{createId}
+		)
+	</insert>
+	
+	<!-- 删除一条新闻 -->
+	<update id="deleteNews" parameterMap="java.util.Map">
+	UPDATE company_news
+		SET newsState = 0
+	WHERE
+		id = #{id}
+	</update>
+	
+	<!-- 修改一条新闻 -->	
+	<update id="deleteNews" parameterMap="java.util.Map">
+	UPDATE company_news
+	<set>
+		title = #{title},
+		content = #{content},
+		createTime = #{createTime}
+	</set>
+	WHERE
+		id = #{id}
+	</update>
+</mapper>          
