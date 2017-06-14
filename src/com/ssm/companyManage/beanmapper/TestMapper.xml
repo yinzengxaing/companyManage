@@ -4,14 +4,10 @@
 <mapper namespace="com.ssm.companyManage.dao.TestMapper">
 
 	<select id="getList" resultType="java.util.Map" parameterType="java.util.Map">
-<<<<<<< HEAD
-		select * from user  	
+		select * from test  	
 		<if test="name != null and name != '' ">
 			where  name = #{name}
 		</if>
-=======
-		select * from test
->>>>>>> 343aa299dc503785133022c97a8b4f1bf9905190
 	</select>
 	
 </mapper>          
