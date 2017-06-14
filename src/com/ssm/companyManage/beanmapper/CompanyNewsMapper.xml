@@ -3,7 +3,7 @@
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.companyManage.dao.CompanyNewsMapper">
 	<!-- 查询newsList -->
-	<select id="getNewsList" resultType="java.util.Map" parameterMap="java.util.Map">
+	<select id="getNewsList" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
 			id,
 			title,
@@ -72,7 +72,7 @@
 	</insert>
 	
 	<!-- 删除一条新闻 -->
-	<update id="deleteNews" parameterMap="java.util.Map">
+	<update id="deleteNews" parameterType="java.util.Map">
 	UPDATE company_news
 		SET newsState = 0
 	WHERE
@@ -80,7 +80,7 @@
 	</update>
 	
 	<!-- 修改一条新闻 -->	
-	<update id="deleteNews" parameterMap="java.util.Map">
+	<update id="updateNews" parameterType="java.util.Map">
 	UPDATE company_news
 	<set>
 		title = #{title},
