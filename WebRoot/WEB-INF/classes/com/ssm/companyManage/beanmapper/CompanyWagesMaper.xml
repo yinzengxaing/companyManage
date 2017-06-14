@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.companyManage.dao.CompanyWagesMapper">
+
+	<!-- 查询和显示全部 -->
+	<select id="selectAllWages" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+			worker.workerNum AS workerNum,
+			worker.workerName AS workerName,
+			wages.wageBase AS wageBase,
+			wages.wageAdd AS wageAdd,
+			wages.wageOutAch AS wageOutAch,
+			wages.wageLengYear AS wageLengYear,
+			wages.wageSum AS wageSum
+			FROM
+			company_wages AS wages,
+			company_worker AS worker
+		WHERE
+			worker.workerId = wages.workerId
+			AND wages.wageState = 1
+			AND worker.workerState = 1
+		<if test="other != null and other != ''">
+			OR (
+			worker.workerName LIKE "%${other}%"
+			OR worker.workerNum LIKE "%${other}%"
+			)
+		</if>
+		ORDER BY worker.workerNum ASC
+	</select>
+	<insert id="insertWages" parameterType="java.util.Map">
+		INSERT (
+			workerNum,
+			workerName,
+			workerBra,
+			workerSex,
+			workerEdu,
+			workerAdd,
+			workerTel,
+			workerDept,
+			workerPosition
+		) 
+		company_wages
+		VALUES
+			(
+				#{workerNum},
+				#{workerName},
+				#{workerBra},
+				#{workerSex},
+				#{workerEdu},
+				#{workerAdd},
+				#{workerTel},
+				#{workerDept},
+				#{workerPosition}
+			)
+	</insert>
+
+	<update id="modifyWages" parameterType="java.util.Map">
+		UPDATE 
+			company_wages
+		SET 
+			wageBase = #{wageBase},
+			wagePlace = #{wagePlace},
+			wageOutAch = #{wageOutAch},
+			wageLengYear = #{wageLengYear},
+			wageSum = #{wageSum}
+		WHERE
+			wageId = #{wageId}
+	</update>
+	
+	<update id="deleteById" parameterType="java.util.Map">
+		update
+			company_wages
+		set
+			wageState = 1
+		where
+			wageId = #{wageId}
+	</update>
+
+</mapper>
