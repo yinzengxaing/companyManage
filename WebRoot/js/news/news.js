@@ -8,6 +8,7 @@ function dataInit(){
 	setData();	
 	eventInit();
 }
+
 function eventInit(){
 	//保存新的新闻按钮事件
 	$('body').on('click', '#add', function(e){

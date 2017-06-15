@@ -99,19 +99,6 @@
 											</tr>
 										</thead>
 										<tbody id="tbody">
-											<tr>
-												<td width="10%">姓名</td>
-												<td width="5%">性别</td>
-												<td width="10%">生日</td>
-												<td width="5%">学历</td>
-												<td width="25%">住址</td>
-												<td width="10%">电话号码</td>
-												<td width="10%">部门</td>
-												<td width="10%">职位</td>
-												<td width="15%">
-													<a class="btn" onclick="openedt('修改职员');">修改</a>&nbsp;&nbsp;
-													<a class="btn" onclick="opendel();">删除</a>
-												</td>
 											</tr>
 										</tbody>
 									</table>
@@ -129,16 +116,16 @@
 										<div class="control-group">
 											<label class="control-label" for="name">姓名</label>
 											<div class="controls">
-												<input type="text" id="name" name="worker.name" placeholder="职员姓名">
+												<input type="text" id="ename" name="worker.name" placeholder="职员姓名">
 											</div>
 										</div>
-										<div class="control-group">
+										<div class="control-group" id="selectSex">
 											<label class="control-label" for="sex">性别</label>
-											<div class="controls">
+											<div class="controls" >
 												<img src="../images/14.png" title="男" width="25px" height="25px" />
-												<input type="radio" id="sex" name="worker.sex" value="男">&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="radio" id="nansex" name="workersex" sex="男" checked="">&nbsp;&nbsp;&nbsp;&nbsp;
 												<img src="../images/15.png" title="女" width="25px" height="25px" />
-												<input type="radio" id="sex" name="worker.sex" value="女">
+												<input type="radio" id="nvsex" name="workersex" sex="女">
 											</div>
 										</div>
 										<div class="control-group">
@@ -149,8 +136,8 @@
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="diploma">学历</label>
-											<div class="controls">
-												<select name="worker.record">
+											<div class="controls" >
+												<select name="worker.record" id="education">
 													<option>--请选择--</option>
 													<option>大学专科</option>
 													<option>大学本科</option>
@@ -174,7 +161,7 @@
 										<div class="control-group">
 											<label class="control-label" for="department">部门</label>
 											<div class="controls">
-												<select name="worker.dept">
+												<select name="worker.dept" id="department">
 													<option>--请选择--</option>
 													<option>人力资源部</option>
 													<option>市场营销部</option>
@@ -188,7 +175,7 @@
 										<div class="control-group">
 											<label class="control-label" for="position">职位</label>
 											<div class="controls">
-												<select name="worker.position">
+												<select name="worker.position" id="duty">
 													<option>--请选择--</option>
 													<option>产品经理</option>
 													<option>策划经理</option>
@@ -203,7 +190,7 @@
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn" data-dismiss="modal" aria-hidden="true" id="closeBtn">关闭</button>
 									<button class="btn btn-primary" id="add" onclick="add();">保存</button>
 								</div>
 							</div>
@@ -242,8 +229,8 @@
 									<h4 align="center">确认删除吗？</h4>
 								</div>
 								<div class="modal-del-footer"><br>
-									<button class="btn btn-primary" id="del" onclick="delnews();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn btn-primary" id="del" >确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="btn" data-dismiss="modal" aria-hidden="true" id="closeTBtn" >关闭</button>
 								</div>
 							</div>
 
@@ -257,11 +244,38 @@
 		<script src="../scripts/jquery-3.0.0.min.js"></script>
 		<script src="../scripts/behind.js"></script>
 		<script src="../laydate.dev.js"></script>
+		
+		<script type="text/javascript" src="../../js/util/main.js"></script>
+		<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
+		<script type="text/javascript" src="../../js/employee/employee.js"></script>
+		
 		<script type="text/javascript">
 			laydate({
 				elem: '#birthday'
 			});
 		</script>
+		
+		<!-- handlebars 遍历表格内容 -->
+		<script id="employeelistBean" type="text/x-handlebars-template" >
+		{{#each rows}}
+			<tr>
+				<td width="10%" >{{name}}</td>
+				<td width="5%">{{sex}}</td>
+				<td width="10%">{{birthday}}</td>
+				<td width="5%">{{education}}</td>
+				<td width="25%">{{address}}</td>
+				<td width="10%">{{phoneNumber}}</td>
+				<td width="10%">{{department}}</td>
+				<td width="10%">{{duty}}</td>
+				<td width="15%">
+						<a class="btn" id="edtBtn" edtId ="{{id}}">修改</a>&nbsp;&nbsp;
+						<a class="btn" id="delBtn" delId ="{{id}}">删除</a>
+				</td>
+			{{/each}}
+		</script>										
+											
 	</body>
+	
+
 
 </html>
