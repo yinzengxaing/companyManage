@@ -46,6 +46,8 @@ function eventInit(){
 	// 监听修改按钮
 	$("body").on("click", "#modifyInfo", function(e){
 		var wageId = $(this).attr("wageId");
+		alert(wageId);
+		openedt('修改职员薪资信息');
 	});
 	
 	// 保存添加的信息
@@ -65,10 +67,10 @@ function eventInit(){
 				workerid:$("#workerBean").val(),
 				wageSum : sum,
 		};
-		alert($("#workerBean").val());
 		AjaxPostUtil.request({url:path+"/post/CompanyWagesController/insertWages",params:param, type:"json", callback:function(json){
 			if(json.returnCode == 0){
 				$("#Addclose").click();
+				wagesInit();
 			}
 		}
 		});

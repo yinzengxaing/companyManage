@@ -94,5 +94,6 @@
 				WHERE
 					company_wages.wageState = 1
 			)
+		GROUP BY employee.id
 	</select>
 </mapper>
