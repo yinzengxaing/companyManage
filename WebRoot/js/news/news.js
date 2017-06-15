@@ -8,6 +8,7 @@ function dataInit(){
 	setData();	
 	eventInit();
 }
+
 function eventInit(){
 	//新增按钮点击事件
 	$('body').on('click', '#addNeswBtn', function(e){
