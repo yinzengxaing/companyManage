@@ -31,6 +31,28 @@ function eventInit(){
 		}
 		});
 	});
+	
+	//删除按钮点击事件
+	$('body').on('click', '#delBtn', function(e){
+		var id = $(this).attr('delId');
+		var params = {
+				id: id
+		};
+		$("#delModal").modal("show");
+		//确定删除按钮点击事件
+		$('body').on('click', '#del', function(e){
+			AjaxPostUtil.request({url:path+"/post/CompanyNewsController/deleteNews",params:params,type:'json',callback:function(json){
+				if (json.returnCode == 0){
+					$('#closeBtn02').click();
+					setTimeout(setData,500);//一秒后刷新页面
+				}else{
+					alert("删除失败！");
+				}
+			}
+			});
+		});
+		
+	});
 }
 
 //初始化数据

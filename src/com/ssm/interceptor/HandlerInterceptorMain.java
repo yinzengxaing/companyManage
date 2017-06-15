@@ -75,7 +75,6 @@ public class HandlerInterceptorMain implements HandlerInterceptor{
         	OutputObject.put();
         }
     }
-
     //执行Handler完成后执行此方法  
   	//应用场景：统一的异常处理，统一的日志处理  
     public void afterCompletion(HttpServletRequest request,
