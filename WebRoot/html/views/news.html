@@ -68,7 +68,7 @@
 					<div class="container-fluid">
 						<div class="row-fluid">
 							<div class="add">
-								<a class="btn btn-success" onclick="openadd('新增公告');">新增</a>
+								<a class="btn btn-success" id="addNeswBtn">新增</a>
 							</div>
 							<div class="page">
 								<a href="#"><img src="../images/08.png" title="首页"/></a>
@@ -78,7 +78,7 @@
 								<a href="#"><img src="../images/11.png" title="尾页"/></a>
 							</div>
 							<div class="search">
-								<input type="text" placeholder="Search" class="seartext"/> <a class="btn btn-success">搜索</a>
+								<input type="text" placeholder="Search" class="seartext" id="searchParams"/> <a class="btn btn-success" id="seachBtn">搜索</a>
 							</div>
 							<div class="w">
 								<div class="span12">
@@ -120,7 +120,7 @@
 										<div class="control-group">
 											<label class="control-label" for="contents">内容</label>
 											<div class="controls">
-												<textarea name="notice.contents" style="height:200px;width:205px;resize: none;" id="content"></textarea>
+												<textarea name="notice.contents" style="height:200px;width:205px;resize: none;" id="content" ></textarea>
 											</div>
 										</div>
 									</form>
@@ -202,7 +202,7 @@
 					<td width="10%">{{createTime}}</td>
 					<td width="55%">{{content}}</td>
 					<td width="15%">
-					<a class="btn" onclick="openedt('修改公告'); edtId="{{id}}" ">修改</a>&nbsp;&nbsp;
+					<a class="btn" id="edtBtn" edtId="{{id}}" ">修改</a>&nbsp;&nbsp;
 					<a class="btn" id="delBtn" delId="{{id}}">删除</a>
 					</td>
 				</tr>
