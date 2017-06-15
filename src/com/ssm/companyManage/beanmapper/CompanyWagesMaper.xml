@@ -6,63 +6,63 @@
 	<!-- 查询和显示全部 -->
 	<select id="selectAllWages" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
-			worker.workerNum AS workerNum,
-			worker.workerName AS workerName,
+			wages.wageId AS wageId,
+			employee.id AS workerNum,
+			employee.`name` AS workerName,
 			wages.wageBase AS wageBase,
+			wages.wagePlace AS wagePlace,
 			wages.wageAdd AS wageAdd,
 			wages.wageOutAch AS wageOutAch,
 			wages.wageLengYear AS wageLengYear,
 			wages.wageSum AS wageSum
-			FROM
-			company_wages AS wages,
-			company_worker AS worker
+		FROM
+			company_wages AS wages
+		LEFT JOIN company_employee AS employee ON wages.workerid = employee.id
 		WHERE
-			worker.workerId = wages.workerId
-			AND wages.wageState = 1
-			AND worker.workerState = 1
+			wages.wageState = 1
+		AND employee.employeeState = 1
 		<if test="other != null and other != ''">
-			OR (
-			worker.workerName LIKE "%${other}%"
-			OR worker.workerNum LIKE "%${other}%"
-			)
+			and employee.`name` LIKE "%${other}%"
 		</if>
-		ORDER BY worker.workerNum ASC
+		ORDER BY employee.id ASC
 	</select>
 	<insert id="insertWages" parameterType="java.util.Map">
-		INSERT (
-			workerNum,
-			workerName,
-			workerBra,
-			workerSex,
-			workerEdu,
-			workerAdd,
-			workerTel,
-			workerDept,
-			workerPosition
-		) 
-		company_wages
-		VALUES
-			(
-				#{workerNum},
-				#{workerName},
-				#{workerBra},
-				#{workerSex},
-				#{workerEdu},
-				#{workerAdd},
-				#{workerTel},
-				#{workerDept},
-				#{workerPosition}
-			)
+		INSERT company_wages (
+			workerid,
+			wageBase,
+			wagePlace,
+			wageAdd,
+			wageOutAch,
+			wageLengYear,
+			wageSum
+		)
+		VALUES(
+			#{workerid},
+			#{wageBase},
+			#{wagePlace},
+			#{wageAdd},
+			#{wageOutAch},
+			#{wageLengYear},
+			#{wageSum}
+		)
 	</insert>
 
 	<update id="modifyWages" parameterType="java.util.Map">
 		UPDATE 
 			company_wages
 		SET 
+		<if test="wageBase != null and wageBase != ''">
 			wageBase = #{wageBase},
+		</if>
+		<if test="wagePlace != null and wagePlace != ''">
 			wagePlace = #{wagePlace},
+		</if>
+		<if test="wageOutAch != null and wageOutAch != ''">
 			wageOutAch = #{wageOutAch},
+		</if>
+		<if test="wageLengYear != null and wageLengYear != ''">
 			wageLengYear = #{wageLengYear},
+		</if>
 			wageSum = #{wageSum}
 		WHERE
 			wageId = #{wageId}
@@ -72,9 +72,27 @@
 		update
 			company_wages
 		set
-			wageState = 1
+			wageState = 0
 		where
 			wageId = #{wageId}
 	</update>
-
+	
+	<!-- 显示所有没有在薪金表中的职员的姓名 -->
+	<select id="selectAllWroker" resultType="java.util.Map">
+		SELECT
+			employee.Id AS workerId,
+			employee.`name` AS workerName
+		FROM
+			company_employee AS employee,
+			company_wages AS wages
+		WHERE
+			employee.id NOT IN (
+				SELECT
+					company_wages.workerId
+				FROM
+					company_wages
+				WHERE
+					company_wages.wageState = 1
+			)
+	</select>
 </mapper>

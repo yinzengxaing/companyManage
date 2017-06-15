@@ -47,5 +47,11 @@ public interface CompanyWagesService {
 	 */
 	public void deleteById(InputObject inputObject , OutputObject outputObject) throws Exception;
 
-	
+	/**
+	 * 显示所有的职员姓名
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	public void selectAllWroker(InputObject inputObject , OutputObject outputObject) throws Exception;
 }

@@ -63,4 +63,16 @@ public class CompanyWagesController {
 	public void deleteById(InputObject inputObject , OutputObject outputObject) throws Exception{
 		companyWagesService.deleteById(inputObject, outputObject);
 	}
+	
+	/**
+	 * 显示所有的人员姓名
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	@RequestMapping("/post/CompanyWagesController/selectAllWroker")
+	@ResponseBody
+	public void selectAllWroker(InputObject inputObject , OutputObject outputObject) throws Exception{
+		companyWagesService.selectAllWroker(inputObject, outputObject);
+	}
 }

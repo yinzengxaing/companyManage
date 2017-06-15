@@ -37,7 +37,6 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	public void selectAllWages(InputObject inputObject , OutputObject outputObject) throws Exception{
 		Map<String, Object> map = inputObject.getParams();
 		List<Map<String, Object>> list =  companyWagesMapper.selectAllWages(map);
-		
 		outputObject.setBeans(list);
 		outputObject.settotal(list.size());
 	}
@@ -49,7 +48,17 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	 * @throws Exception
 	 */
 	public void insertWages(InputObject inputObject , OutputObject outputObject) throws Exception{
+		Map<String, Object> map = inputObject.getParams();
+		String workerid = map.get("workerid")+"";
+		// 首先查询该薪金表中是否含有该员工，有的话提示错误，没有的话进行插入操作
+		List<Map<String, Object>> list = companyWagesMapper.selectAllWages(null);
+		for(int i = 0 ; i < list.size(); i ++){
+			if(workerid.equals(list.get(i).get("wageId"))){
+				return;
+			}
+		}
 		
+		companyWagesMapper.insertWages(map);
 	}
 	
 	/**
@@ -59,7 +68,8 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	 * @throws Exception
 	 */
 	public void modifyWages(InputObject inputObject , OutputObject outputObject) throws Exception{
-		
+		Map<String, Object> map = inputObject.getParams();
+		companyWagesMapper.modifyWages(map);
 	}
 	
 	/**
@@ -69,9 +79,19 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	 * @throws Exception
 	 */
 	public void deleteById(InputObject inputObject , OutputObject outputObject) throws Exception{
-		
+		Map<String, Object> map = inputObject.getParams();
+		companyWagesMapper.deleteById(map);
 	}
 
-	
-	
+	/**
+	 * 显示所有的职员姓名
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	public void selectAllWroker(InputObject inputObject,OutputObject outputObject) throws Exception {
+		List<Map<String, Object>> list= companyWagesMapper.selectAllWroker();
+		outputObject.setBeans(list);
+		outputObject.settotal(list.size());
+	}
 }

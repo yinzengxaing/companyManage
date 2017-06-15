@@ -46,4 +46,12 @@ public interface CompanyWagesMapper {
 	 * @throws Exception
 	 */
 	public void deleteById(Map<String, Object> map) throws Exception;
+
+	/**
+	 * 显示所有没有在薪金表中的职员的名称
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Map<String, Object>> selectAllWroker() throws Exception;
+	
 }
