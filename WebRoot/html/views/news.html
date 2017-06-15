@@ -68,17 +68,18 @@
 					<div class="container-fluid">
 						<div class="row-fluid">
 							<div class="add">
-								<a class="btn btn-success" onclick="openadd('新增公告');">新增</a>
+								<a class="btn btn-success" id="addNeswBtn">新增</a>
 							</div>
 							<div class="page">
-								<a href="#"><img src="../images/08.png" title="首页"/></a>
-								<a href="#"><img src="../images/09.png" title="上一页"/></a>
-								 当前是第&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;共&nbsp;&nbsp;页  
-								<a href="#"><img src="../images/10.png" title="下一页"/></a>
-								<a href="#"><img src="../images/11.png" title="尾页"/></a>
+								<a href="#" id="headerPage"><img src="../images/08.png" title="首页"/></a>
+								<a href="#" id="previousPage"><img src="../images/09.png" title="上一页"/></a>
+								 当前是第 <font id="page"></font> 页&nbsp;&nbsp;&nbsp;&nbsp;共<font id="totalPage"></font>页  
+								<a href="#" id="nextPage"><img src="../images/10.png" title="下一页"/></a>
+								<a href="#" id="trailerPage"><img src="../images/11.png" title="尾页"/></a>
+								共<font id="total"></font>条记录
 							</div>
 							<div class="search">
-								<input type="text" placeholder="Search" class="seartext"/> <a class="btn btn-success">搜索</a>
+								<input type="text" placeholder="Search" class="seartext" id="searchParams"/> <a class="btn btn-success" id="seachBtn">搜索</a>
 							</div>
 							<div class="w">
 								<div class="span12">
@@ -120,7 +121,7 @@
 										<div class="control-group">
 											<label class="control-label" for="contents">内容</label>
 											<div class="controls">
-												<textarea name="notice.contents" style="height:200px;width:205px;resize: none;" id="content"></textarea>
+												<textarea name="notice.contents" style="height:200px;width:205px;resize: none;" id="content" ></textarea>
 											</div>
 										</div>
 									</form>
@@ -160,7 +161,6 @@
 									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 								</div>
 							</div>
-							
 							<!-- 删除的model -->
 							<div id="delModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 25%;">
 								<div class="modal-header">
@@ -168,8 +168,8 @@
 									<h4 align="center">确认删除吗？</h4>
 								</div>
 								<div class="modal-del-footer"><br>
-									<button class="btn btn-primary" id="del" onclick="delnews();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn btn-primary" id="del">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="btn" data-dismiss="modal" aria-hidden="true" id="closeBtn02">关闭</button>
 								</div>
 							</div>
 							
@@ -199,12 +199,12 @@
 		<script id="newsListBean" type="text/x-handlebars-template">
 			{{#each rows}}
 				<tr>	
-					<td width="20%" newsId={{id}}>{{title}}</td>
+					<td width="20%" id= >{{title}}</td>
 					<td width="10%">{{createTime}}</td>
 					<td width="55%">{{content}}</td>
 					<td width="15%">
-					<a class="btn" onclick="openedt('修改公告');">修改</a>&nbsp;&nbsp;
-					<a class="btn" onclick="opendel();">删除</a>
+					<a class="btn" id="edtBtn" edtId="{{id}}" ">修改</a>&nbsp;&nbsp;
+					<a class="btn" id="delBtn" delId="{{id}}">删除</a>
 					</td>
 				</tr>
 			{{/each}}
