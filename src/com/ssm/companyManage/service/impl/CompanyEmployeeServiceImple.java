@@ -30,6 +30,7 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void getEmployeeList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> parmas = inputObject.getParams();
+		System.out.println(parmas);
 		List<Map<String,Object>> employeeList = companyEmployeeMapper.getEmployeeList(parmas);
 		outputObject.setBeans(employeeList);
 		outputObject.settotal(employeeList.size());
@@ -42,7 +43,9 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void getEmployeeById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> parmas = inputObject.getParams();
+		System.out.println(parmas);
 		Map<String, Object> EmployeeById = companyEmployeeMapper.getEmployeeById(parmas);
+		System.out.println(EmployeeById);
 		outputObject.setBean(EmployeeById);
 	}
 	/**
@@ -87,6 +90,7 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void uptadeEmployee(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> parmas = inputObject.getParams();
+		System.out.println(parmas);
 		companyEmployeeMapper.uptadeEmployee(parmas);
 
 	}

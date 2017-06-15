@@ -18,7 +18,7 @@
 		FROM
 			company_employee
 		<where>
-			employeeState=1;
+			employeeState=1
 			<if test="name !=null and name != ''">
 				and name like '%${name}%'  
 			</if>
@@ -30,7 +30,8 @@
    <select id="getEmployeeById" parameterType="java.util.Map" resultType="java.util.Map">
  		SELECT
    			 id,
-			NAME,
+			name,
+			sex,
 			birthday,
 			education,
 			address,
@@ -98,7 +99,8 @@
 	<update id="uptadeEmployee" parameterType="java.util.Map">
 	UPDATE company_employee
 		<set>
-			NAME = #{name},
+			name = #{name},
+			sex = #{sex},
 			birthday = #{birthday} ,
 			education = #{education},
 			address = #{address},
