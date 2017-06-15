@@ -71,11 +71,12 @@
 								<a class="btn btn-success" id="addNeswBtn">新增</a>
 							</div>
 							<div class="page">
-								<a href="#"><img src="../images/08.png" title="首页"/></a>
-								<a href="#"><img src="../images/09.png" title="上一页"/></a>
-								 当前是第&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;共&nbsp;&nbsp;页  
-								<a href="#"><img src="../images/10.png" title="下一页"/></a>
-								<a href="#"><img src="../images/11.png" title="尾页"/></a>
+								<a href="#" id="headerPage"><img src="../images/08.png" title="首页"/></a>
+								<a href="#" id="previousPage"><img src="../images/09.png" title="上一页"/></a>
+								 当前是第 <font id="page"></font> 页&nbsp;&nbsp;&nbsp;&nbsp;共<font id="totalPage"></font>页  
+								<a href="#" id="nextPage"><img src="../images/10.png" title="下一页"/></a>
+								<a href="#" id="trailerPage"><img src="../images/11.png" title="尾页"/></a>
+								共<font id="total"></font>条记录
 							</div>
 							<div class="search">
 								<input type="text" placeholder="Search" class="seartext" id="searchParams"/> <a class="btn btn-success" id="seachBtn">搜索</a>

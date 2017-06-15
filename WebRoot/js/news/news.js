@@ -1,4 +1,5 @@
 var title = "";
+var page = 1; //默认显示第一页
 
 $(function(e){
 	dataInit();
@@ -20,6 +21,7 @@ function eventInit(){
 	//保存新的新闻按钮事件
 	$('body').on('click', '#add', function(e){
 		var params = {
+			page : $('#page').html(),	
 			title : $('#title').val(),
 			createTime : $('#date').val(),
 			content : $('#content').val()
@@ -108,16 +110,56 @@ function eventInit(){
 		title = $('#searchParams').val();
 		setData();
 	});
+	//下一页按钮点击事件
+	$('body').on('click', '#nextPage', function(e){
+		//获取当前页码并且加1
+		var num = $('#page').html();
+		 page = num*1 + 1*1;
+		 if (page > $('#totalPage').html() )
+			 return;
+		setData();
+		
+	});
+	
+	//上一页按钮点击事件
+	$('body').on('click', '#previousPage', function(e){
+		//获取当前页码并且减1
+		var num = $('#page').html();
+		 page = num*1 - 1*1;
+		 if (page <= 0)
+			 return;
+		setData();
+	});
+	
+	//首页按钮点击事件
+	$('body').on('click', '#headerPage', function(e){
+		//获取当前页码并且减1
+		 page = 1;
+		setData();
+	});
+	
+	//尾页按钮点击事件
+	$('body').on('click', '#trailerPage', function(e){
+		//获取当前页码并且减1
+		 page = $('#totalPage').html();
+		setData();
+	});
 }
 
 //初始化数据
 function setData(){
+	//设置当前页码
 	var params = {
-			title : title
+			page:page, //当前页
+			title:title
 	};
 	AjaxPostUtil.request({url:path+"/post/CompanyNewsController/getNewsList",params:params,type:'json',callback:function(json){
 		if (json.returnCode == 0){
 			//填充数据
+			//设置当前页码
+			$('#page').html(json.bean.page);
+			$('#totalPage').html(json.bean.totalPage);
+			$('#total').html(json.total);
 			var source = $("#newsListBean").html();
 			var template = Handlebars.compile(source);
 			$("#tbody").html(template(json));
@@ -125,5 +167,3 @@ function setData(){
 	}
 	});
 }
-
-

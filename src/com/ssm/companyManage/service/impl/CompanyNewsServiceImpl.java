@@ -1,5 +1,6 @@
 package com.ssm.companyManage.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,20 +33,22 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 	public void getNewsList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
 		//进行分页
-		//获取分页信息
-/*		int page = Integer.parseInt(params.get("offset").toString())/Integer.parseInt(params.get("limit").toString());
-		page++;
-		int limit = Integer.parseInt(params.get("limit").toString());
+		int page =Integer.parseInt(params.get("page").toString()); //当前页；
+		int limit = 10; //定义每一页条数
 		List<Map<String,Object>> newsList = companyNewsMapper.getNewsList(params, new PageBounds(page, limit));
 		PageList<Map<String, Object>> abilityInfoPageList = (PageList<Map<String, Object>>)newsList;
 		//获取当前页数的总数
 		int total = abilityInfoPageList.getPaginator().getTotalCount();
+		//保存分页信息的Map
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		pageMap.put("page", page);
+		int totalPage = total/limit; //计算页数
+		if (total%limit != 0)
+			totalPage = totalPage+1;
+		pageMap.put("totalPage",totalPage);
 		outputObject.setBeans(newsList);
-		outputObject.settotal(total);*/
-		List<Map<String,Object>> newsList = companyNewsMapper.getNewsList(params);
-		outputObject.setBeans(newsList);
-		outputObject.settotal(newsList.size());
-		
+		outputObject.settotal(total);
+		outputObject.setBean(pageMap);
 	}
 
 	/**
@@ -99,7 +102,7 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 		//判断信息是否完整
 		if (JudgeUtil.isNull(title) || JudgeUtil.isNull(content) || JudgeUtil.isNull(createTime)){
 			outputObject.setreturnMessage("请将信息补充完整!");
-			return;
+			return;	
 		}
 		String id = params.get("id").toString();
 		//检查修改后的标题是否已经存在
