@@ -11,6 +11,7 @@ import com.ssm.companyManage.dao.CompanyEmployeeMapper;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyEmployeeService;
+import com.ssm.companyManage.util.JudgeUtil;
 
 /**
  * 人员service实现类
@@ -67,6 +68,29 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void addEmployee(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
+		String name = params.get("name").toString();
+		String sex = params.get("sex").toString();
+		String birthday = params.get("birthday").toString();
+		String phoneNumber = params.get("phoneNumber").toString();
+		String address =params.get("address").toString();
+		
+		String education =params.get("education").toString();
+		String department =params.get("department").toString();
+		String duty =params.get("duty").toString();
+		
+		if(JudgeUtil.isNull(name)||JudgeUtil.isNull(sex)||JudgeUtil.isNull(name)||JudgeUtil.isNull(address)||JudgeUtil.isNull(birthday)){
+			outputObject.setreturnMessage("请将信息补充完整!");
+			return;
+		}else if(JudgeUtil.isDate(birthday)){
+			outputObject.setreturnMessage("生日格式有问题！");
+			return;
+		}else if(education.equals("--请选择--")||department.equals("--请选择--")||duty.equals("--请选择--")){
+			outputObject.setreturnMessage("请选择你的学历、部门、职务");
+			return;	
+		}else if(!JudgeUtil.isPhoneNO(phoneNumber)){
+			outputObject.setreturnMessage("手机号格式有问题");
+			return;
+		}
 		System.out.println(params);
 		companyEmployeeMapper.addEmployee(params);
 
@@ -89,9 +113,31 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 * @throws Exception
 	 */
 	public void uptadeEmployee(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> parmas = inputObject.getParams();
-		System.out.println(parmas);
-		companyEmployeeMapper.uptadeEmployee(parmas);
+		Map<String, Object> params = inputObject.getParams();
+		System.out.println(params);
+		String name = params.get("name").toString();
+		String sex = params.get("sex").toString();
+		String birthday = params.get("birthday").toString();
+		String phoneNumber = params.get("phoneNumber").toString();
+		String address =params.get("address").toString();
+		
+		String education =params.get("education").toString();
+		String department =params.get("department").toString();
+		String duty =params.get("duty").toString();
+		if(JudgeUtil.isNull(name)||JudgeUtil.isNull(sex)||JudgeUtil.isNull(name)||JudgeUtil.isNull(address)||JudgeUtil.isNull(birthday)){
+			outputObject.setreturnMessage("请将信息补充完整!");
+			return;
+		}else if(JudgeUtil.isDate(birthday)){
+			outputObject.setreturnMessage("生日格式有问题！");
+			return;
+		}else if(education.equals("--请选择--")||department.equals("--请选择--")||duty.equals("--请选择--")){
+			outputObject.setreturnMessage("请选择你的学历、部门、职务");
+			return;	
+		}else if(!JudgeUtil.isPhoneNO(phoneNumber)){
+			outputObject.setreturnMessage("手机号格式有问题");
+			return;
+		}
+		companyEmployeeMapper.uptadeEmployee(params);
 
 	}
 

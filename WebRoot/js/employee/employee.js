@@ -147,6 +147,7 @@ function eventInit() {
 			}	
 			AjaxPostUtil.request({url:path+"/post/CompanyEmployeeController/uptadeEmployee",params:updateParams,type:'json',callback:function(json){
 				if (json.returnCode == 0){
+					
 					//使添加的model隐藏起来
 					$('#closeBtn').click();
 					//刷新数据

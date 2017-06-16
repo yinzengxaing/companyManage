@@ -106,7 +106,7 @@
 			address = #{address},
 			phoneNumber = #{phoneNumber},
 			department = #{department},
-			duty = #{duty},
+			duty = #{duty}
 		</set>
 		WHERE
 		id = #{id}
