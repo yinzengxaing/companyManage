@@ -41,6 +41,8 @@ function openedt(str) {
 	$("#name").attr("readonly", true);
 	$("input").val("");
 	$("#addModal").modal("show");
+	$("#edt").show();
+	$("#add").hide();	
 	$("#saveAdd").hide();
 	$("#saveEdit").show();
 }

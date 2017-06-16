@@ -1,5 +1,6 @@
 package com.ssm.companyManage.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,10 +8,14 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.ssm.companyManage.dao.CompanyEmployeeMapper;
+import com.ssm.companyManage.dao.CompanyWagesMapper;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyEmployeeService;
+import com.ssm.companyManage.service.CompanyWagesService;
 import com.ssm.companyManage.util.JudgeUtil;
 
 /**
@@ -23,6 +28,8 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 
 	@Resource
 	private CompanyEmployeeMapper companyEmployeeMapper;
+	@Resource
+	private CompanyWagesMapper companyWagesMapper;
 	/**
 	 * 获取所有的人员
 	 * @param inputObject
@@ -30,11 +37,26 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 * @throws Exception
 	 */
 	public void getEmployeeList(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> parmas = inputObject.getParams();
-		System.out.println(parmas);
-		List<Map<String,Object>> employeeList = companyEmployeeMapper.getEmployeeList(parmas);
+		Map<String, Object> params = inputObject.getParams();
+		//进行分页
+		int page =Integer.parseInt(params.get("page").toString()); //当前页；
+		int limit = 10; //定义每一页条数
+		List<Map<String,Object>> employeeList = companyEmployeeMapper.getEmployeeList(params,new PageBounds(page, limit));
+
+		PageList<Map<String, Object>> abilityInfoPageList = (PageList<Map<String, Object>>)employeeList;
+		//获取当前页数的总数
+		int total = abilityInfoPageList.getPaginator().getTotalCount();
+		//保存分页信息的Map
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		
+		pageMap.put("page", page);
+		int totalPage = total/limit; //计算页数
+		if (total%limit != 0)
+			totalPage = totalPage+1;
+		pageMap.put("totalPage",totalPage);
 		outputObject.setBeans(employeeList);
-		outputObject.settotal(employeeList.size());
+		outputObject.settotal(total);
+		outputObject.setBean(pageMap);
 	}
 	/**
 	 * 根据人员id获取所有信息
@@ -104,7 +126,9 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	public void deleteEmployee(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> parmas = inputObject.getParams();
 		companyEmployeeMapper.deleteEmployee(parmas);
-
+		parmas.put("workerId", parmas.get("id"));
+		System.out.println(parmas);
+		companyWagesMapper.deleteById(parmas);
 	}
 	/**
 	 * 修改人员信息
