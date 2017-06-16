@@ -24,6 +24,14 @@ public interface CompanyWagesMapper {
 	public List<Map<String, Object>> selectAllWages(Map<String, Object> map ) throws Exception;
 	
 	/**
+	 * 通过id查询工资信息 
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Map<String, Object>> selectById(Map<String, Object> map) throws Exception;
+	
+	/**
 	 * 插入数据
 	 * @param inputObject
 	 * @param outputObject

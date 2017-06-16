@@ -27,7 +27,17 @@ public class CompanyWagesController {
 	public void selectAllWages(InputObject inputObject , OutputObject outputObject) throws Exception{
 		companyWagesService.selectAllWages(inputObject, outputObject);
 	}
-	
+	/**
+	 * 通过wageId查询职员信息
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	@RequestMapping("/post/CompanyWagesController/selectById")
+	@ResponseBody
+	public void selectById(InputObject inputObject, OutputObject outputObject)throws Exception {
+		companyWagesService.selectById(inputObject, outputObject);
+	}
 	/**
 	 * 插入数据
 	 * @param inputObject
