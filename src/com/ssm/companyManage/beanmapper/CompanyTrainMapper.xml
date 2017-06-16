@@ -3,10 +3,10 @@
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.companyManage.dao.CompanyTrainMapper">
 
-	<select id="selectAllTrain" resultType="java.util.Map">
+	<select id="selectAllTrain" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT
 			train.trainId AS trainId,
-			train.title AS trainTitle,
+			train.trainTitle AS trainTitle,
 			employee.`name` AS trainName,
 			train.trainTime AS trainTime,
 			train.other AS trainOther
@@ -16,6 +16,10 @@
 		WHERE
 			train.state = 1
 		AND employee.employeeState = 1
+		<if test="other != null and other != ''">
+			AND train.other LIKE "%${other}%"
+			AND train.trainTitle LIKE "%${other}%"
+		</if>
 	</select>
 	
 	<select id="selectAllEmployee" resultType="java.util.Map">
@@ -23,7 +27,7 @@
 			`name` AS employeeName
 		FROM
 			company_employee AS employee
-		WHEREa
+		WHERE
 			employee.employeeState = 1
 	</select>
 	

@@ -25,7 +25,7 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/selectAllTrain")
 	@ResponseBody
 	public void selectAllTrain(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.selectAllTrain(inputObject, outputObject);
 	}
 	
 	/**
@@ -38,7 +38,7 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/selectAllEmployee")
 	@ResponseBody
 	public void selectAllEmployee(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.selectAllEmployee(inputObject, outputObject);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/insertTrain")
 	@ResponseBody
 	public void insertTrain(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.insertTrain(inputObject, outputObject);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/modifyById")
 	@ResponseBody
 	public void modifyById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.modifyById(inputObject, outputObject);
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/deleteById")
 	@ResponseBody
 	public void deleteById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.deleteById(inputObject, outputObject);
 	}
 	
 }
