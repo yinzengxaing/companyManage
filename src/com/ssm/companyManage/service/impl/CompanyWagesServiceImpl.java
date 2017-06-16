@@ -73,10 +73,11 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 			&& map.get("wageAdd").toString().matches(regx) //
 			&& map.get("wageOutAch").toString().matches(regx) //
 			&& map.get("wageLengYear").toString().matches(regx) ){
+			companyWagesMapper.modifyWages(map);
 		}else{
 			return;
 		}
-		companyWagesMapper.modifyWages(map);
+		System.out.println(map);
 	}
 	
 	/**

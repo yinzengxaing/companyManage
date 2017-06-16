@@ -34,6 +34,8 @@ function openadd(str) {
 	$("#addModal").modal("show");
 	$("#add").show();
 	$("#edt").hide();
+	$("#saveAdd").show();
+	$("#saveEdit").hide();
 }
 
 function openedt(str) {

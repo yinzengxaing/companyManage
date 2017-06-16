@@ -31,6 +31,21 @@ function eventInit(){
 		trainInit();
 	});
 	
+	// 显示添加的窗口
+	$("body").on("click", "#addTrain", function(e){
+		openadd('新增培训');
+	});
+	
+	// 添加确认按钮
+	$("body").on("click", "#saveEdit", function(e){
+	 	var param = {
+	 			$("#course").val(),// 课程
+	 			$("#lecturer").val(), // 讲师
+	 			$("#date").val(), // 时间
+	 			$("#otherInfo").val(), // 简介
+	 	};
+		
+	});
 	
 	
 	

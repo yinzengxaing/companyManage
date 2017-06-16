@@ -68,7 +68,7 @@
 					<div class="container-fluid">
 						<div class="row-fluid">
 							<div class="add">
-								<a class="btn btn-success" onclick="openadd('新增培训');">新增</a>
+								<a class="btn btn-success" id="addTrain">新增</a>
 								<a class="btn btn-success">打印</a>
 							</div>
 							<div class="page">
@@ -130,14 +130,15 @@
 										<div class="control-group">
 											<label class="control-label" for="introduction">简介</label>
 											<div class="controls">
-												<textarea name="train.introduction" style="height:150px;width:205px;resize: none;"></textarea>
+												<textarea id ="otherInfo" name="train.introduction" style="height:150px;width:205px;resize: none;"></textarea>
 											</div>
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer">
 									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-									<button class="btn btn-primary" id="add" onclick="add();">保存</button>
+									<button class="btn btn-primary" id="saveAdd">保存</button>
+									<button class="btn btn-primary" id="saveEdit">保存</button>
 								</div>
 							</div>
 							
