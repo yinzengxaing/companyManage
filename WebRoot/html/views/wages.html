@@ -63,12 +63,12 @@
 						</div>
 					</div>
 				</div>
-
+				
 				<div class="span10 content-right">
 					<div class="container-fluid">
 						<div class="row-fluid">
 							<div class="add">
-								<a class="btn btn-success" onclick="openadd('新增职员薪资信息');">新增</a>
+								<a class="btn btn-success" id="addWageBtn" >新增</a>
 								<a class="btn btn-success">打印</a>
 							</div>
 							<div class="page">
@@ -79,8 +79,8 @@
 								<a href="#"><img src="../images/11.png" title="尾页" /></a>
 							</div>
 							<div class="search">
-								<input type="text" placeholder="Search" class="seartext" />
-								<a class="btn btn-success">搜索</a>
+								<input type="text" placeholder="Search" class="seartext" id="searchWage"/>
+								<a class="btn btn-success" id="searchWages">搜索</a>
 							</div>
 							<div class="w">
 								<div class="span12">
@@ -98,26 +98,14 @@
 												<th width="10%">操作</th>
 											</tr>
 										</thead>
-										<tbody id="tbody">
-											<tr>
-												<td width="10%">工号</td>
-												<td width="15%">姓名</td>
-												<td width="10%">基本工资</td>
-												<td width="10%">岗位工资</td>
-												<td width="10%">加班工资</td>
-												<td width="10%">绩效奖</td>
-												<td width="10%">工龄奖</td>
-												<td width="15%">合计</td>
-												<td width="10%">
-													<a class="btn" onclick="openedt('修改职员薪资信息');">修改</a>&nbsp;&nbsp;
-												</td>
-											</tr>
+										<tbody id="wagesList">
+											
 										</tbody>
 									</table>
 									<div id="page" class="tr"></div>
 								</div>
 							</div>
-
+							<!-- 新增薪资 -->
 							<div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -128,44 +116,47 @@
 										<div class="control-group">
 											<label class="control-label" for="name">姓名</label>
 											<div class="controls">
-												<input type="text" id="name" placeholder="职员姓名">
+												<select id="workerBean" name="workerSelect">
+												</select>												
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="baseWage">基本工资</label>
 											<div class="controls">
-												<input type="text" id="wage.baseWage" placeholder="">
+												<input type="text" id="wageBase" value="">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="postWage">岗位工资</label>
 											<div class="controls">
-												<input type="text" id="wage.postWage" placeholder="">
+												<input type="text" id="wagePlace" value="">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="overtimeWage">加班工资</label>
 											<div class="controls">
-												<input type="text" id="wage.overtimeWage" placeholder="">
+												<input type="text" id="wageAdd" value="">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="performance">绩效奖</label>
 											<div class="controls">
-												<input type="text" id="wage.performance" placeholder="">
+												<input type="text" id="wageOutAch" value="">
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="seniority">工龄奖</label>
 											<div class="controls">
-												<input type="text" id="wage.seniority" placeholder="">
+												<input type="text" id="wageLengYear" value="">
 											</div>
 										</div>
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-									<button class="btn btn-primary" id="add" onclick="add();">保存</button>
+									<button class="btn" data-dismiss="modal" id="Addclose" aria-hidden="true">关闭</button>
+									<button class="btn btn-primary" id="saveAdd">保存</button>
+									<button class="btn btn-primary" id="saveEdit">保存</button>
+									
 								</div>
 							</div>
 
@@ -192,7 +183,7 @@
 								</div>
 
 								<div class="modal-del-footer">
-									<button class="btn btn-primary" id="edt" onclick="edtadmin();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="btn btn-primary" id="edt"">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
 									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 								</div>
 							</div>
@@ -204,8 +195,37 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="foot"></div>
+		
+		<script id="wagesBean" type="text/x-handlebars-template">
+			{{#each rows}}
+				<tr>
+					<td width="10%">{{workerNum}}</td>
+					<td width="15%">{{workerName}}</td>
+					<td width="10%">{{wageBase}}</td>
+					<td width="10%">{{wagePlace}}</td>
+					<td width="10%">{{wageAdd}}</td>
+					<td width="10%">{{wageOutAch}}</td>
+					<td width="10%">{{wageLengYear}}</td>
+					<td width="15%">{{wageSum}}</td>
+					<td width="10%">
+						<a class="btn" id="modifyInfo" wageId={{wageId}} >修改</a>&nbsp;&nbsp;
+					</td>
+				</tr>
+			{{/each}}
+		</script>
+		
+		<script id="workerNameList" type="text/x-handlebars-template">
+			{{#each rows}}
+				<option value="{{workerId}}" >{{workerName}}</option>
+			{{/each}}
+		</script>
 		<script src="../scripts/jquery-3.0.0.min.js"></script>
 		<script src="../scripts/behind.js"></script>
+		<script src="../laydate.dev.js"></script>
+		
+		<script type="text/javascript" src="../../js/util/main.js"></script>
+		<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
+		<script src="../../js/wages/wage.js"></script>
 	</body>
 
 </html>
