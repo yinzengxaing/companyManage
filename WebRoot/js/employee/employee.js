@@ -11,7 +11,9 @@ function dataInit(){
 
 function eventInit() {
 	//保存新的员工按钮事件
-	$('body').on('click','#add',function(e){
+	$('body').on('click','#AddEmployBtn',function(e){
+		openadd('新增职员');
+		$('body').on('click','#add',function(e){
 		var params = {
 				name : $('#ename').val(),
 				sex : $('#selectSex input[name="workersex"]:checked ').attr("sex"),
@@ -32,6 +34,7 @@ function eventInit() {
 				alert(json.returnMessage);
 			}
 		}
+			});
 		});
 	});
 	
@@ -63,8 +66,6 @@ function eventInit() {
 		setData();
 	});
 	
-	
-	
 	//修改员工按钮事件
 	$('body').on('click','#edtBtn',function(e){
 		var id = $(this).attr('edtId');
@@ -83,7 +84,6 @@ function eventInit() {
 				}
 				//回显生日
 				$('#birthday').val(json.bean.birthday);
-				
 				//回显学历
 				if(json.bean.education == '大学专科'){
 					  $("#education  option[value='大学专科'] ").attr("selected",true);
@@ -130,7 +130,6 @@ function eventInit() {
 			}
 		}
 		});
-		
 		openedt('修改职员');
 		//修改按钮点击事件
 		$('body').on('click','#edt',function(e){
@@ -147,7 +146,6 @@ function eventInit() {
 			}	
 			AjaxPostUtil.request({url:path+"/post/CompanyEmployeeController/uptadeEmployee",params:updateParams,type:'json',callback:function(json){
 				if (json.returnCode == 0){
-					
 					//使添加的model隐藏起来
 					$('#closeBtn').click();
 					//刷新数据

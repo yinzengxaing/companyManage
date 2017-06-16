@@ -8,9 +8,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.ssm.companyManage.dao.CompanyEmployeeMapper;
+import com.ssm.companyManage.dao.CompanyWagesMapper;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyEmployeeService;
+import com.ssm.companyManage.service.CompanyWagesService;
 import com.ssm.companyManage.util.JudgeUtil;
 
 /**
@@ -23,6 +25,8 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 
 	@Resource
 	private CompanyEmployeeMapper companyEmployeeMapper;
+	@Resource
+	private CompanyWagesMapper companyWagesMapper;
 	/**
 	 * 获取所有的人员
 	 * @param inputObject
@@ -104,7 +108,8 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	public void deleteEmployee(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> parmas = inputObject.getParams();
 		companyEmployeeMapper.deleteEmployee(parmas);
-
+		parmas.put("workerId", parmas.get("id"));
+		companyWagesMapper.deleteById(parmas);
 	}
 	/**
 	 * 修改人员信息
