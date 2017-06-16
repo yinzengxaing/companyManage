@@ -26,6 +26,23 @@
 		</if>
 		ORDER BY employee.id ASC
 	</select>
+	
+	<select id="selectById" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+			employee.`name` AS workerName,
+			wages.wageBase AS wageBase,
+			wages.wagePlace AS wagePlace,
+			wages.wageAdd AS wageAdd,
+			wages.wageOutAch AS wageOutAch,
+			wages.wageLengYear AS wageLengYear
+		FROM
+			company_wages AS wages
+		LEFT JOIN company_employee AS employee ON wages.workerid = employee.id
+		WHERE
+			wages.wageState = 1
+		AND employee.employeeState = 1
+		AND wages.wageId = #{wageId}
+	</select>
 	<insert id="insertWages" parameterType="java.util.Map">
 		INSERT company_wages (
 			workerid,
@@ -74,7 +91,7 @@
 		set
 			wageState = 0
 		where
-			wageId = #{wageId}
+			workerId = #{workerId}
 	</update>
 	
 	<!-- 显示所有没有在薪金表中的职员的姓名 -->
@@ -94,5 +111,9 @@
 				WHERE
 					company_wages.wageState = 1
 			)
+		AND wages.wageState = 1
+		AND employee.employeeState = 1
+		GROUP BY
+			employee.id
 	</select>
 </mapper>

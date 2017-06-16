@@ -24,6 +24,13 @@ public interface CompanyWagesService {
 	public void selectAllWages(InputObject inputObject , OutputObject outputObject) throws Exception;
 	
 	/**
+	 * 通过wagesId查询信息
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	public void selectById (InputObject inputObject , OutputObject outputObject) throws Exception;
+	/**
 	 * 插入数据
 	 * @param inputObject
 	 * @param outputObject

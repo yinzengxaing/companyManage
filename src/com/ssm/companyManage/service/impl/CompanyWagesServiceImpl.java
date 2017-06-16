@@ -2,7 +2,6 @@ package com.ssm.companyManage.service.impl;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -27,7 +26,8 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 
 	@Resource
 	CompanyWagesMapper companyWagesMapper;
-
+	private String regx = "[1-9]?[0-9]*(\\.[0-9]{1,2})?";
+	
 	/**
 	 * 显示多有和通过条件模糊查询
 	 * @param inputObject
@@ -57,7 +57,6 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 				return;
 			}
 		}
-		
 		companyWagesMapper.insertWages(map);
 	}
 	
@@ -69,7 +68,16 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	 */
 	public void modifyWages(InputObject inputObject , OutputObject outputObject) throws Exception{
 		Map<String, Object> map = inputObject.getParams();
-		companyWagesMapper.modifyWages(map);
+		if(map.get("wageBase").toString().matches(regx) //
+			&& map.get("wagePlace").toString().matches(regx) //
+			&& map.get("wageAdd").toString().matches(regx) //
+			&& map.get("wageOutAch").toString().matches(regx) //
+			&& map.get("wageLengYear").toString().matches(regx) ){
+			companyWagesMapper.modifyWages(map);
+		}else{
+			return;
+		}
+		System.out.println(map);
 	}
 	
 	/**
@@ -93,5 +101,17 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 		List<Map<String, Object>> list= companyWagesMapper.selectAllWroker();
 		outputObject.setBeans(list);
 		outputObject.settotal(list.size());
+	}
+
+	/**
+	 * 通过wagesId查询信息
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	public void selectById(InputObject inputObject, OutputObject outputObject)throws Exception {
+		Map<String, Object> map = inputObject.getParams();
+		List<Map<String, Object>> wagesMap = companyWagesMapper.selectById(map);
+		outputObject.setBeans(wagesMap);
 	}
 }

@@ -31,7 +31,6 @@
 				<li>
 					<a href="#"><img src="../images/home.png" />首页</a> <span class="divider">>></span></li>
 				<li class="active"></li>
-
 			</ul>
 
 		</div>
@@ -68,15 +67,16 @@
 					<div class="container-fluid">
 						<div class="row-fluid">
 							<div class="add">
-								<a class="btn btn-success" onclick="openadd('新增职员');">新增</a>
+								<a class="btn btn-success" id="AddEmployBtn">新增</a>
 								<a class="btn btn-success">打印</a>
 							</div>
 							<div class="page">
-								<a href="#"><img src="../images/08.png" title="首页" /></a>
-								<a href="#"><img src="../images/09.png" title="上一页" /></a>
-								当前是第&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;共&nbsp;&nbsp;页
-								<a href="#"><img src="../images/10.png" title="下一页" /></a>
-								<a href="#"><img src="../images/11.png" title="尾页" /></a>
+								<a href="#" id="headerPage"><img src="../images/08.png" title="首页"/></a>
+								<a href="#" id="previousPage"><img src="../images/09.png" title="上一页"/></a>
+								 当前是第 <font id="page"></font> 页&nbsp;&nbsp;&nbsp;&nbsp;共<font id="totalPage"></font>页  
+								<a href="#" id="nextPage"><img src="../images/10.png" title="下一页"/></a>
+								<a href="#" id="trailerPage"><img src="../images/11.png" title="尾页"/></a>
+								共<font id="total"></font>条记录
 							</div>
 							<div class="search">
 								<input type="text" placeholder="Search" class="seartext" id="searchParams"/>
@@ -190,12 +190,12 @@
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true" id="closeBtn">关闭</button>
 									<button class="btn btn-primary" id="add" >保存</button>
 									<button class="btn btn-primary" id="edt" >保存</button>
+									<button class="btn" data-dismiss="modal" aria-hidden="true" id="closeBtn">关闭</button>
 								</div>
 							</div>
-
+							<!-- adminModel -->
 							<div id="adminModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 25%;">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -219,11 +219,11 @@
 								</div>
 
 								<div class="modal-del-footer">
-									<button class="btn btn-primary" id="edt" onclick="edtadmin();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="btn btn-primary" id="edtAdmin" onclick="edtadmin();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
 									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 								</div>
 							</div>
-
+							<!-- 删除的model -->
 							<div id="delModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 25%;">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -269,7 +269,7 @@
 				<td width="10%">{{department}}</td>
 				<td width="10%">{{duty}}</td>
 				<td width="15%">
-						<a class="btn" id="edtBtn" edtId ="{{id}}"  >修改</a>&nbsp;&nbsp;
+						<a class="btn" id="edtBtn" edtId ="{{id}}">修改</a>&nbsp;&nbsp;
 						<a class="btn" id="delBtn" delId ="{{id}}">删除</a>
 				</td>
 			{{/each}}

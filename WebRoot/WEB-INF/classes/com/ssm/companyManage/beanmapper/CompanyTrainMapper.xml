@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.companyManage.dao.CompanyTrainMapper">
+
+	<select id="selectAllTrain" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			train.trainId AS trainId,
+			train.trainTitle AS trainTitle,
+			employee.`name` AS trainName,
+			train.trainTime AS trainTime,
+			train.other AS trainOther
+		FROM
+			company_train AS train
+		LEFT JOIN company_employee AS employee ON train.employeeId = employee.id
+		WHERE
+			train.state = 1
+		AND employee.employeeState = 1
+		<if test="other != null and other != ''">
+			AND train.other LIKE "%${other}%"
+			AND train.trainTitle LIKE "%${other}%"
+		</if>
+	</select>
+	
+	<select id="selectAllEmployee" resultType="java.util.Map">
+		SELECT
+			`name` AS employeeName
+		FROM
+			company_employee AS employee
+		WHERE
+			employee.employeeState = 1
+	</select>
+	
+	<insert id="insertTrain" parameterType="java.util.Map">
+		INSERT company_train (
+			trainTitle,
+			employeeId,
+			trainTime,
+			other,
+			createId
+		) VALUES (
+			#{trainTitle}, 
+			#{employeeId}, 
+			#{trainTime}, 
+			#{other}, 
+			#{createId}
+		)
+	</insert>
+	
+	<update id="modifyById" parameterType="java.util.Map">
+		UPDATE 
+			company_train
+		SET 
+		<if test="trainTitle != null and trainTitle !=''">
+			trainTitle = #{trainTitle},
+		</if>
+		<if test="employeeId != null and employeeId != ''">
+			employeeId = #{employeeId},
+		</if>
+		<if test="trainTime != null and trainTime != ''">
+			trainTime = #{trainTime},
+		</if>
+		<if test="other != null and other != ''">
+		 	other = #{other},
+		 </if>
+		 	createId = #{createId}
+		WHERE
+			trainId = #{trainId}
+	</update>
+	
+	<update id="deleteById" parameterType="java.util.Map">
+		UPDATE company_train
+		SET 
+			state = 0
+		WHERE
+			trainId = #{trainId}
+			
+	</update>
+</mapper>
