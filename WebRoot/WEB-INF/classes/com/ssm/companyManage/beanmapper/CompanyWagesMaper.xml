@@ -91,7 +91,7 @@
 		set
 			wageState = 0
 		where
-			wageId = #{wageId}
+			workerId = #{workerId}
 	</update>
 	
 	<!-- 显示所有没有在薪金表中的职员的姓名 -->

@@ -1,4 +1,6 @@
 var name = '';
+var id = "";
+var page = 1;//默认显示第一页
 $(function(e){
 	dataInit();
 });
@@ -40,13 +42,16 @@ function eventInit() {
 	
 	//删除员工按钮事件
 	$('body').on('click','#delBtn',function(e){
-		var id = $(this).attr("delId");
-		var params = {
-				id : id
-		}
+		id = $(this).attr("delId");
 		//确定选择
 		$("#delModal").modal("show");
-		$('body').on('click','#del',function(e){
+	})
+	
+	//删除确定事件
+	$('body').on('click','#del',function(e){
+		    	var params = {
+		    			id : id
+		    		}
 			AjaxPostUtil.request({url:path+"/post/CompanyEmployeeController/deleteEmployee",params:params,type:'json',callback:function(json){
 			if(json.returnCode == 0){
 			//使添加的model关闭
@@ -58,7 +63,6 @@ function eventInit() {
 			}
 			});
 		});
-	})
 	
 	//查询员工按钮事件
 	$('body').on('click', '#seachBtn', function(e){
@@ -68,7 +72,7 @@ function eventInit() {
 	
 	//修改员工按钮事件
 	$('body').on('click','#edtBtn',function(e){
-		var id = $(this).attr('edtId');
+		id = $(this).attr('edtId');
 		var params = {
 			id : id
 		}
@@ -130,43 +134,86 @@ function eventInit() {
 			}
 		}
 		});
+		//掉用修改页面
 		openedt('修改职员');
-		//修改按钮点击事件
-		$('body').on('click','#edt',function(e){
-			var updateParams = {
-					id : id,
-					name : $('#ename').val(),
-					sex : $('#selectSex input[name="workersex"]:checked ').attr("sex"),
-					birthday : $('#birthday').val(),
-					education : $('#education option:selected').val(),
-					address : $('#address').val(),
-					phoneNumber : $('#tel').val(),
-					department : $('#department option:selected').val(),
-					duty : $('#duty option:selected').val(),
-			}	
-			AjaxPostUtil.request({url:path+"/post/CompanyEmployeeController/uptadeEmployee",params:updateParams,type:'json',callback:function(json){
-				if (json.returnCode == 0){
-					//使添加的model隐藏起来
-					$('#closeBtn').click();
-					//刷新数据
-					setData();
-				}else{
-					alert(json.returnMessage);
-				}
+	});
+	//修改按钮点击事件
+	$('body').on('click','#edt',function(e){
+		var updateParams = {
+				id : id,
+				name : $('#ename').val(),
+				sex : $('#selectSex input[name="workersex"]:checked ').attr("sex"),
+				birthday : $('#birthday').val(),
+				education : $('#education option:selected').val(),
+				address : $('#address').val(),
+				phoneNumber : $('#tel').val(),
+				department : $('#department option:selected').val(),
+				duty : $('#duty option:selected').val(),
+		}	
+		AjaxPostUtil.request({url:path+"/post/CompanyEmployeeController/uptadeEmployee",params:updateParams,type:'json',callback:function(json){
+			if (json.returnCode == 0){
+				//使添加的model隐藏起来
+				$('#closeBtn').click();
+				//刷新数据
+				setData();
+			}else{
+				alert(json.returnMessage);
 			}
-			});
+		}
 		});
+	});
+	
+	//下一页按钮点击事件
+	$('body').on('click', '#nextPage', function(e){
+		//获取当前页码并且加1
+		var num = $('#page').html();
+		 page = num*1 + 1*1;
+		 if (page > $('#totalPage').html() )
+			 return;
+		setData();
 		
 	});
+	
+	//上一页按钮点击事件
+	$('body').on('click', '#previousPage', function(e){
+		//获取当前页码并且减1
+		var num = $('#page').html();
+		 page = num*1 - 1*1;
+		 if (page <= 0)
+			 return;
+		setData();
+	});
+	
+	//首页按钮点击事件
+	$('body').on('click', '#headerPage', function(e){
+		//获取当前页码并且减1
+		 page = 1;
+		setData();
+	});
+	
+	//尾页按钮点击事件
+	$('body').on('click', '#trailerPage', function(e){
+		//获取当前页码并且减1
+		 page = $('#totalPage').html();
+		setData();
+	});
+	
 }
 
 //初始化数据
 function setData(){
 	var params = {
+			page : page,//当前页
 			name : name
 	};
 	AjaxPostUtil.request({url:path+"/post/CompanyEmployeeController/getEmployeeList",params:params,type:'json',callback:function(json){
 		if(json.returnCode == 0){
+			//填充数据
+			//设置当前页码
+			$('#page').html(json.bean.page);
+			$('#totalPage').html(json.bean.totalPage);
+			$('#total').html(json.total)
+			
 			var source = $("#employeelistBean").html();
 			var template = Handlebars.compile(source);
 			$("#tbody").html(template(json));
