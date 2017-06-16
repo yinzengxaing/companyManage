@@ -59,7 +59,7 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 	 */
 	public void addNews(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-		
+	
 		String title = params.get("title").toString();
 		String content = params.get("content").toString();
 		String createTime = params.get("createTime").toString();
@@ -99,12 +99,12 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 		String title = params.get("title").toString();
 		String content = params.get("content").toString();
 		String createTime = params.get("createTime").toString();
+		String id = params.get("id").toString();
 		//判断信息是否完整
 		if (JudgeUtil.isNull(title) || JudgeUtil.isNull(content) || JudgeUtil.isNull(createTime)){
 			outputObject.setreturnMessage("请将信息补充完整!");
 			return;	
 		}
-		String id = params.get("id").toString();
 		//检查修改后的标题是否已经存在
 		Map<String, Object> newsByTitle = companyNewsMapper.getNewsByTitle(params);
 		if (newsByTitle != null){
@@ -113,7 +113,6 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 				outputObject.setreturnMessage("您输入的新闻标题已经存在，请重新输入!");
 				return;
 			}
-			
 		}
 		companyNewsMapper.updateNews(params);
 	}
