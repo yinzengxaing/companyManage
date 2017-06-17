@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="com.ssm.companyManage.dao.CompanyManageMapper">
+ 
+ <!-- 验证管理员帐号密码。并返回该管理员id，姓名 -->
+ 
+ <select id="judge" resultType="java.util.Map" parameterType="java.util.Map">
+		 SELECT
+			id,
+			NAME
+		 FROM
+			company_admin as admin
+		WHERE
+			admin.loginname = #{loginName}
+			AND 
+			admin.password = #{password}
+ </select>
+ 
+ 
+ <!-- 更改管理员帐号密码 -->
+ <update id="updateLoginnameAndPassword">
+		UPDATE
+		 	 company_admin
+		<set>
+			loginname = #{loginName} ,
+            password = #{password}
+		</set>
+	    WHERE
+	       id = #{id}
+ </update>
+ 
+ </mapper>
+
+ 
