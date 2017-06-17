@@ -35,9 +35,11 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 	 * @throws Exception
 	 */
 	public void selectAllTrain(InputObject inputObject,	OutputObject outputObject) throws Exception {
-		List<Map<String, Object>> list = companyTrainMapper.selectAllEmployee();
+		Map<String, Object> map = inputObject.getParams();
+		List<Map<String, Object>> list = companyTrainMapper.selectAllTrain(map);
 		outputObject.setBeans(list);
 		outputObject.settotal(list.size());
+		
 	}
 
 	/**
@@ -47,10 +49,10 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 	 * @return
 	 * @throws Exception
 	 */
-	public void selectAllEmployee(InputObject inputObject,OutputObject outputObject) throws Exception {
-		List<Map<String, Object>> list = companyTrainMapper.selectAllEmployee();
-		outputObject.setBeans(list);
-		outputObject.settotal(list.size());
+	public void selectTrainById(InputObject inputObject,OutputObject outputObject) throws Exception {
+		Map<String, Object> map = inputObject.getParams();
+		Map<String, Object> trainMap = companyTrainMapper.selectTrainById(map);
+		outputObject.setBean(trainMap);
 	}
 
 	/**

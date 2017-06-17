@@ -21,7 +21,7 @@ public interface CompanyTrainMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Map<String, Object>> selectAllTrain() throws Exception;
+	public List<Map<String, Object>> selectAllTrain(Map<String, Object> map) throws Exception;
 	
 	/**
 	 * 查询所有的员工的名称
@@ -30,7 +30,7 @@ public interface CompanyTrainMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Map<String, Object>> selectAllEmployee() throws Exception;
+	public Map<String, Object> selectTrainById(Map<String, Object> map) throws Exception;
 	
 	/**
 	 * 插入培训信息

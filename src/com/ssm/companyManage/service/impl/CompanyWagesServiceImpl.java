@@ -26,7 +26,7 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 
 	@Resource
 	CompanyWagesMapper companyWagesMapper;
-//	private String regx = "[1-9]?[0-9]*(\.[0-9]{1,2})?";
+	private String regx = "[1-9]?[0-9]*(\\.[0-9]{1,2})?";
 	
 	/**
 	 * 显示多有和通过条件模糊查询
@@ -49,14 +49,14 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	 */
 	public void insertWages(InputObject inputObject , OutputObject outputObject) throws Exception{
 		Map<String, Object> map = inputObject.getParams();
-//		String workerid = map.get("workerid")+"";
-//		// 首先查询该薪金表中是否含有该员工，有的话提示错误，没有的话进行插入操作
-//		List<Map<String, Object>> list = companyWagesMapper.selectAllWages(null);
-//		for(int i = 0 ; i < list.size(); i ++){
-//			if(workerid.equals(list.get(i).get("wageId"))){
-//				return;
-//			}
-//		}
+		String workerid = map.get("workerid")+"";
+		// 首先查询该薪金表中是否含有该员工，有的话提示错误，没有的话进行插入操作
+		List<Map<String, Object>> list = companyWagesMapper.selectAllWages(null);
+		for(int i = 0 ; i < list.size(); i ++){
+			if(workerid.equals(list.get(i).get("wageId"))){
+				return;
+			}
+		}
 		companyWagesMapper.insertWages(map);
 	}
 	
@@ -68,15 +68,16 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	 */
 	public void modifyWages(InputObject inputObject , OutputObject outputObject) throws Exception{
 		Map<String, Object> map = inputObject.getParams();
-//		if(map.get("wageBase").toString().matches(regx) //
-//			&& map.get("wagePlace").toString().matches(regx) //
-//			&& map.get("wageAdd").toString().matches(regx) //
-//			&& map.get("wageOutAch").toString().matches(regx) //
-//			&& map.get("wageLengYear").toString().matches(regx) ){
-//		}else{
-//			return;
-//		}
-		companyWagesMapper.modifyWages(map);
+		if(map.get("wageBase").toString().matches(regx) //
+			&& map.get("wagePlace").toString().matches(regx) //
+			&& map.get("wageAdd").toString().matches(regx) //
+			&& map.get("wageOutAch").toString().matches(regx) //
+			&& map.get("wageLengYear").toString().matches(regx) ){
+			companyWagesMapper.modifyWages(map);
+		}else{
+			return;
+		}
+		System.out.println(map);
 	}
 	
 	/**

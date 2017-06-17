@@ -23,7 +23,7 @@
 			<bean class="com.ssm.interceptor.HandlerInterceptorGateway" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
+	<!-- 校验器 -->
 	<mvc:annotation-driven conversion-service="conversionService" validator="validator">
 	</mvc:annotation-driven>
 	<!-- 静态资源解析 包括 ：js、css、img、.. -->

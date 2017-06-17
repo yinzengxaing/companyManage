@@ -1,5 +1,6 @@
 var title = "";
 var page = 1; //默认显示第一页
+var id = "" ;
 
 $(function(e){
 	dataInit();
@@ -43,29 +44,29 @@ function eventInit(){
 	
 	//删除按钮点击事件
 	$('body').on('click', '#delBtn', function(e){
-		var id = $(this).attr('delId');
+		 id = $(this).attr('delId');
+		$("#delModal").modal("show");
+	});
+	//确定删除按钮点击事件
+	$('body').on('click', '#del', function(e){
 		var params = {
 				id: id
 		};
-		$("#delModal").modal("show");
-		//确定删除按钮点击事件
-		$('body').on('click', '#del', function(e){
-			AjaxPostUtil.request({url:path+"/post/CompanyNewsController/deleteNews",params:params,type:'json',callback:function(json){
-				if (json.returnCode == 0){
-					$('#closeBtn02').click();
-					setTimeout(setData,500);//一秒后刷新页面
-				}else{
-					alert("删除失败！");
-				}
+		AjaxPostUtil.request({url:path+"/post/CompanyNewsController/deleteNews",params:params,type:'json',callback:function(json){
+			if (json.returnCode == 0){
+				$('#closeBtn02').click();
+				setTimeout(setData,500);//一秒后刷新页面
+			}else{
+				alert("删除失败！");
 			}
-			});
+		}
 		});
-		
 	});
+	
 	
 	//修改按钮点击事件
 	$('body').on('click', '#edtBtn', function(e){
-		var id = $(this).attr('edtId');
+		id = $(this).attr('edtId');
 		var params = {
 				id: id
 		};
@@ -79,6 +80,8 @@ function eventInit(){
 		}
 		});
 		openedt("修改公告");
+	});
+		
 		//修改按钮点击事件
 		$('body').on('click', '#edt', function(e){
 			var updateParams = {
@@ -104,10 +107,10 @@ function eventInit(){
 			});
 		});
 		
-	});
 	//搜索按钮点击事件
 	$('body').on('click', '#seachBtn', function(e){
 		title = $('#searchParams').val();
+		 page = 1;
 		setData();
 	});
 	//下一页按钮点击事件
@@ -145,7 +148,6 @@ function eventInit(){
 		setData();
 	});
 }
-
 //初始化数据
 function setData(){
 	//设置当前页码

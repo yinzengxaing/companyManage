@@ -111,6 +111,9 @@
 				WHERE
 					company_wages.wageState = 1
 			)
-		GROUP BY employee.id
+		AND wages.wageState = 1
+		AND employee.employeeState = 1
+		GROUP BY
+			employee.id
 	</select>
 </mapper>

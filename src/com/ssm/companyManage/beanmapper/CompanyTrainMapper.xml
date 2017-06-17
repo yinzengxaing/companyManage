@@ -3,43 +3,46 @@
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.companyManage.dao.CompanyTrainMapper">
 
-	<select id="selectAllTrain" resultType="java.util.Map">
-		SELECT
-			train.trainId AS trainId,
-			train.title AS trainTitle,
-			employee.`name` AS trainName,
-			train.trainTime AS trainTime,
-			train.other AS trainOther
-		FROM
-			company_train AS train
-		LEFT JOIN company_employee AS employee ON train.employeeId = employee.id
-		WHERE
-			train.state = 1
-		AND employee.employeeState = 1
+	<select id="selectAllTrain" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT
+				train.trainId AS trainId,
+				train.trainTitle AS trainTitle,
+				train.trainLecturer AS lecture,
+				train.trainTime AS trainTime,
+				train.other AS trainOther
+			FROM
+				company_train AS train
+			WHERE
+				train.state = 1
+		<if test="other != null and other != ''">
+			AND train.other LIKE "%${other}%"
+			AND train.trainTitle LIKE "%${other}%"
+		</if>
 	</select>
 	
-	<select id="selectAllEmployee" resultType="java.util.Map">
+	<select id="selectTrainById" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
-			`name` AS employeeName
+			trainTitle,
+			trainLecturer,
+			trainTime,
+			other
 		FROM
-			company_employee AS employee
-		WHEREa
-			employee.employeeState = 1
+			company_train
+		WHERE
+			trainId =#{trainId}
 	</select>
 	
 	<insert id="insertTrain" parameterType="java.util.Map">
 		INSERT company_train (
 			trainTitle,
-			employeeId,
+			trainLecturer,
 			trainTime,
-			other,
-			createId
+			other
 		) VALUES (
 			#{trainTitle}, 
-			#{employeeId}, 
+			#{trainLecturer}, 
 			#{trainTime}, 
-			#{other}, 
-			#{createId}
+			#{other}
 		)
 	</insert>
 	
@@ -50,16 +53,13 @@
 		<if test="trainTitle != null and trainTitle !=''">
 			trainTitle = #{trainTitle},
 		</if>
-		<if test="employeeId != null and employeeId != ''">
-			employeeId = #{employeeId},
+		<if test="trainLecturer != null and trainLecturer != ''">
+			trainLecturer = #{trainLecturer},
 		</if>
 		<if test="trainTime != null and trainTime != ''">
 			trainTime = #{trainTime},
 		</if>
-		<if test="other != null and other != ''">
-		 	other = #{other},
-		 </if>
-		 	createId = #{createId}
+		 	other = #{other}
 		WHERE
 			trainId = #{trainId}
 	</update>

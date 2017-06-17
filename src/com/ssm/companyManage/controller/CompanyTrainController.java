@@ -25,20 +25,20 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/selectAllTrain")
 	@ResponseBody
 	public void selectAllTrain(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.selectAllTrain(inputObject, outputObject);
 	}
 	
 	/**
-	 * 查询所有的员工的名称
+	 * 
 	 * @param inputObject
 	 * @param outputObject
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/post/CompanyTrainController/selectAllEmployee")
+	@RequestMapping("/post/CompanyTrainController/selectTrainById")
 	@ResponseBody
-	public void selectAllEmployee(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+	public void selectTrainById(InputObject inputObject, OutputObject outputObject) throws Exception{
+		companyTrainService.selectTrainById(inputObject, outputObject);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/insertTrain")
 	@ResponseBody
 	public void insertTrain(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.insertTrain(inputObject, outputObject);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/modifyById")
 	@ResponseBody
 	public void modifyById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.modifyById(inputObject, outputObject);
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class CompanyTrainController {
 	@RequestMapping("/post/CompanyTrainController/deleteById")
 	@ResponseBody
 	public void deleteById(InputObject inputObject, OutputObject outputObject) throws Exception{
-		
+		companyTrainService.deleteById(inputObject, outputObject);
 	}
 	
 }
