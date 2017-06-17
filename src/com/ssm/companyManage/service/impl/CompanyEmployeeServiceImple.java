@@ -15,7 +15,6 @@ import com.ssm.companyManage.dao.CompanyWagesMapper;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyEmployeeService;
-import com.ssm.companyManage.service.CompanyWagesService;
 import com.ssm.companyManage.util.JudgeUtil;
 
 /**
