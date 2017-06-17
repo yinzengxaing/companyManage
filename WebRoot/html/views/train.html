@@ -135,7 +135,7 @@
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn" id="Addclose" data-dismiss="modal" aria-hidden="true">关闭</button>
 									<button class="btn btn-primary" id="saveAdd">保存</button>
 									<button class="btn btn-primary" id="saveEdit">保存</button>
 								</div>
@@ -176,7 +176,7 @@
 								</div>
 								<div class="modal-del-footer"><br>
 									<button class="btn btn-primary" id="del" onclick="delnews();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
-									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+									<button class="btn" id="deleByTrain" data-dismiss="modal" aria-hidden="true">关闭</button>
 								</div>
 							</div>
 						</div>
@@ -203,12 +203,12 @@
 			{{#each rows}}
 				<tr>
 					<td width="20%">{{trainTitle}}</td>
-					<td width="10%">{{trainName}}</td>
+					<td width="10%">{{lecture}}</td>
 					<td width="10%">{{trainTime}}</td>
 					<td width="45%">{{trainOther}}</td>
 					<td width="15%">
-						<a class="btn" trainId={{trainId}} onclick="openedt('修改培训信息');">修改</a>&nbsp;&nbsp;
-						<a class="btn" trainId={{trainId}} onclick="opendel();">删除</a>
+						<a class="btn" id="modifyInfo" trainId={{trainId}} onclick="openedt('修改培训信息');">修改</a>&nbsp;&nbsp;
+						<a class="btn" id="deleInfo" trainid={{trainId}} onclick="opendel();">删除</a>
 					</td>
 				</tr>
 			{{/each}}

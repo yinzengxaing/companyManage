@@ -22,7 +22,7 @@ public interface CompanyTrainService {
 	 * @return
 	 * @throws Exception
 	 */
-	public void selectAllEmployee(InputObject inputObject, OutputObject outputObject) throws Exception;
+	public void selectTrainById(InputObject inputObject, OutputObject outputObject) throws Exception;
 	
 	/**
 	 * 插入培训信息
