@@ -29,16 +29,16 @@ public class CompanyTrainController {
 	}
 	
 	/**
-	 * 查询所有的员工的名称
+	 * 
 	 * @param inputObject
 	 * @param outputObject
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/post/CompanyTrainController/selectAllEmployee")
+	@RequestMapping("/post/CompanyTrainController/selectTrainById")
 	@ResponseBody
-	public void selectAllEmployee(InputObject inputObject, OutputObject outputObject) throws Exception{
-		companyTrainService.selectAllEmployee(inputObject, outputObject);
+	public void selectTrainById(InputObject inputObject, OutputObject outputObject) throws Exception{
+		companyTrainService.selectTrainById(inputObject, outputObject);
 	}
 	
 	/**

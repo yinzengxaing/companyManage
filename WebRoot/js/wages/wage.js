@@ -85,7 +85,6 @@ function eventInit(){
 				wageAdd: add,
 				wageOutAch: outach,
 				wageLengYear: lengYear,
-				workerid:$("#workerBean").val(),
 				wageSum : sum,
 				wageId:wagesId,
 		};
