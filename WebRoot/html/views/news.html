@@ -31,9 +31,7 @@
 				<li>
 					<a href="#"><img src="../images/home.png" />首页</a> <span class="divider">>></span></li>
 				<li class="active"></li>
-
 			</ul>
-
 		</div>
 		<div id="sysdate"></div>
 		<div class="container-fluid content">
@@ -157,7 +155,7 @@
 								</div>
 								
 								<div class="modal-del-footer">
-									<button class="btn btn-primary" id="edt" onclick="edtadmin();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="btn btn-primary" id="edtAdmin" onclick="edtadmin();">确认</button>&nbsp;&nbsp;&nbsp;&nbsp;
 									<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 								</div>
 							</div>
@@ -183,17 +181,9 @@
 		<script src="../scripts/jquery-3.0.0.min.js"></script>
 		<script src="../scripts/behind.js"></script>
 		<script src="../laydate.dev.js"></script>
-		
 		<script type="text/javascript" src="../../js/util/main.js"></script>
 		<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
 		<script type="text/javascript" src="../../js/news/news.js"></script>
-		
-		
-		<script type="text/javascript">
-			laydate({
-				elem: '#date'
-			});
-		</script>
 		
 		<!-- handlebars 遍历表格内容 -->
 		<script id="newsListBean" type="text/x-handlebars-template">
@@ -203,11 +193,17 @@
 					<td width="10%">{{createTime}}</td>
 					<td width="55%">{{content}}</td>
 					<td width="15%">
-					<a class="btn" id="edtBtn" edtId="{{id}}" ">修改</a>&nbsp;&nbsp;
+					<a class="btn" id="edtBtn" edtId="{{id}}">修改</a>&nbsp;&nbsp;
 					<a class="btn" id="delBtn" delId="{{id}}">删除</a>
 					</td>
 				</tr>
 			{{/each}}
+		</script>
+		
+		<script type="text/javascript">
+			laydate({
+				elem: '#date'
+			});
 		</script>
 		
 	</body>
