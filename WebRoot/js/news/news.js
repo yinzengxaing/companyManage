@@ -79,7 +79,7 @@ function eventInit(){
 			}
 		}
 		});
-		openedt("修改公告");
+		openedt("修改公告"); // 打开修改页面
 	});
 		
 		//修改按钮点击事件
