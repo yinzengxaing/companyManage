@@ -1,5 +1,6 @@
 package com.ssm.companyManage.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.ssm.companyManage.dao.CompanyTrainMapper;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
@@ -36,10 +39,24 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 	 */
 	public void selectAllTrain(InputObject inputObject,	OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
-		List<Map<String, Object>> list = companyTrainMapper.selectAllTrain(map);
-		outputObject.setBeans(list);
-		outputObject.settotal(list.size());
+		// 进行分页
+		int page = Integer.parseInt(map.get("page").toString());
+		int limit = 10 ; // 定义每一页的条数
 		
+		List<Map<String, Object>> list = companyTrainMapper.selectAllTrain(map, new PageBounds(page, limit));
+		PageList<Map<String, Object>> abilityInfoPageList = (PageList<Map<String,Object>>)list;
+		// 获取当前的总页数
+		int total = abilityInfoPageList.getPaginator().getTotalCount();
+		// 保存分页信息的Map
+		Map<String, Object> pageMap = new HashMap<String,Object>();
+		pageMap.put("page", page);
+		int totalPage = total / limit; // 计算页数
+		if(total % limit != 0)
+			totalPage = totalPage + 1;
+		pageMap.put("totalPage", totalPage);
+		outputObject.setBean(pageMap);
+		outputObject.setBeans(list);
+		outputObject.settotal(total);
 	}
 
 	/**
