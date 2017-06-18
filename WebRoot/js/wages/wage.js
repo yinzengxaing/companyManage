@@ -132,7 +132,7 @@ function eventInit(){
 				$("#Addclose").click();
 				wagesInit();
 			}else{
-				alert("工资必须为数字！！!");
+				alert(json.returnMessage);
 			}
 		}
 		});
@@ -146,7 +146,6 @@ function eventInit(){
 		var outach = $("#wageOutAch").val();
 		var lengYear = $("#wageLengYear").val();
 		var sum = Number(base) + Number(place) + Number(add) + Number(outach) + Number(lengYear);
-		alert(("#page").html);
 		var param= {
 				page:$("#page").html,
 				wageBase : base,
@@ -161,6 +160,8 @@ function eventInit(){
 			if(json.returnCode == 0){
 				$("#Addclose").click();
 				wagesInit();
+			}else{
+				alert(json.returnMessage);
 			}
 		}
 		});

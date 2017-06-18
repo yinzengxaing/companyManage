@@ -57,7 +57,7 @@ function eventInit(){
 				$("#Addclose").click();
 				trainInit();
 			}else{
-				
+				alert(json.returnMessage);
 			}
 		}});
 	});
@@ -96,6 +96,8 @@ function eventInit(){
 				
 				$("#Addclose").click();
 				trainInit();
+			}else{
+				alert(json.returnMessage);
 			}
 		}});
 		

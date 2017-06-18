@@ -14,6 +14,7 @@ import com.ssm.companyManage.dao.CompanyTrainMapper;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyTrainService;
+import com.ssm.companyManage.util.JudgeUtil;
 /**
  * 员工培训
 * Title: CompanyTrainServiceImpl
@@ -29,7 +30,6 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 
 	@Resource
 	CompanyTrainMapper companyTrainMapper;
-	
 	/**
 	 * 显示全部的培训信息
 	 * @param inputObject
@@ -80,6 +80,26 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 	 */
 	public void insertTrain(InputObject inputObject, OutputObject outputObject)	throws Exception {
 		Map<String, Object> map = inputObject.getParams();
+		String 	trainTitle = map.get("trainTitle").toString();
+		String trainLecturer = map.get("trainLecturer").toString();
+		String trainTime = map.get("trainTime").toString();
+		String other = map.get("other").toString();
+		if(JudgeUtil.isNull(trainTitle)){
+			outputObject.setreturnMessage("标题不能为空！！！");
+			return;
+		}
+		if(JudgeUtil.isNull(trainLecturer)){
+			outputObject.setreturnMessage("讲师不能为空！！！");
+			return ;
+		}
+		if(JudgeUtil.isNull(trainTime)){
+			outputObject.setreturnMessage("培训时间不能为空！！！");
+			return ;
+		}
+		if(JudgeUtil.isNull(other)){
+			outputObject.setreturnMessage("培训内容不能为空！！！");
+			return ;
+		}
 		companyTrainMapper.insertTrain(map);
 	}
 
@@ -91,6 +111,26 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 	 */
 	public void modifyById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
+		String 	trainTitle = map.get("trainTitle").toString();
+		String trainLecturer = map.get("trainLecturer").toString();
+		String trainTime = map.get("trainTime").toString();
+		String other = map.get("other").toString();
+		if(JudgeUtil.isNull(trainTitle)){
+			outputObject.setreturnMessage("标题不能为空！！！");
+			return;
+		}
+		if(JudgeUtil.isNull(trainLecturer)){
+			outputObject.setreturnMessage("讲师不能为空！！！");
+			return ;
+		}
+		if(JudgeUtil.isNull(trainTime)){
+			outputObject.setreturnMessage("培训时间不能为空！！！");
+			return ;
+		}
+		if(JudgeUtil.isNull(other)){
+			outputObject.setreturnMessage("培训内容不能为空！！！");
+			return ;
+		}
 		companyTrainMapper.modifyById(map);
 	}
 
