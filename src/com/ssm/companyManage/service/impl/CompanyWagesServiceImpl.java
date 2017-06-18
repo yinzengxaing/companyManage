@@ -1,11 +1,14 @@
 package com.ssm.companyManage.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.ssm.companyManage.dao.CompanyWagesMapper;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
@@ -34,11 +37,26 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	 * @param outputObject
 	 * @throws Exception
 	 */
+	//companyWagesMapper.selectAllWages(map, new PageBounds(page, limit));
 	public void selectAllWages(InputObject inputObject , OutputObject outputObject) throws Exception{
-		Map<String, Object> map = inputObject.getParams();
-		List<Map<String, Object>> list =  companyWagesMapper.selectAllWages(map);
-		outputObject.setBeans(list);
-		outputObject.settotal(list.size());
+		Map<String, Object> params = inputObject.getParams();
+		//进行分页
+		int page =Integer.parseInt(params.get("page").toString()); //当前页；
+		int limit = 10; //定义每一页条数
+		List<Map<String,Object>> newsList = companyWagesMapper.selectAllWages(params, new PageBounds(page, limit));
+		PageList<Map<String, Object>> abilityInfoPageList = (PageList<Map<String, Object>>)newsList;
+		//获取当前页数的总数
+		int total = abilityInfoPageList.getPaginator().getTotalCount();
+		//保存分页信息的Map
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		pageMap.put("page", page);
+		int totalPage = total/limit; //计算页数
+		if (total%limit != 0)
+			totalPage = totalPage+1;
+		pageMap.put("totalPage",totalPage);
+		outputObject.setBeans(newsList);
+		outputObject.settotal(total);
+		outputObject.setBean(pageMap);
 	}
 	
 	/**
@@ -77,7 +95,6 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 		}else{
 			return;
 		}
-		System.out.println(map);
 	}
 	
 	/**

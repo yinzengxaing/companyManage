@@ -24,7 +24,7 @@ function eventInit(){
 		var params = {
 			page : $('#page').html(),	
 			title : $('#title').val(),
-			createTime : $('#date').val(),
+			createTime : $('#date').val(),	
 			content : $('#content').val()
 		}
 		AjaxPostUtil.request({url:path+"/post/CompanyNewsController/addNews",params:params,type:'json',callback:function(json){

@@ -3,6 +3,8 @@ package com.ssm.companyManage.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+
 /**
  * 薪资Dao
 * Title: CompanyWagesMapper
@@ -22,7 +24,8 @@ public interface CompanyWagesMapper {
 	 * @throws Exception
 	 */
 	public List<Map<String, Object>> selectAllWages(Map<String, Object> map ) throws Exception;
-	
+	// 添加分页
+	public List<Map<String, Object>> selectAllWages(Map<String, Object>map, PageBounds pageBounds)throws Exception;
 	/**
 	 * 通过id查询工资信息 
 	 * @param map
