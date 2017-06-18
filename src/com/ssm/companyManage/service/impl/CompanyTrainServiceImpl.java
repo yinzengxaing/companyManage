@@ -53,6 +53,9 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 		int totalPage = total / limit; // 计算页数
 		if(total % limit != 0)
 			totalPage = totalPage + 1;
+		if (total  <= 0){
+			totalPage = 1;
+		}
 		pageMap.put("totalPage", totalPage);
 		outputObject.setBean(pageMap);
 		outputObject.setBeans(list);
