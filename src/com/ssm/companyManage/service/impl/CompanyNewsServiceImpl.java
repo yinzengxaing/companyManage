@@ -62,7 +62,7 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 	 */
 	public void addNews(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-	
+		Map<String, Object> logParams = inputObject.getLogParams();
 		String title = params.get("title").toString();
 		String content = params.get("content").toString();
 		String createTime = params.get("createTime").toString();

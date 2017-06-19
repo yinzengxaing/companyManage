@@ -6,6 +6,7 @@ $(function(e){
 });
 
 
+
 function dataInit(){
 	setData();	
 	eventInit();
@@ -15,7 +16,9 @@ function eventInit() {
 	//保存新的员工按钮事件
 	$('body').on('click','#AddEmployBtn',function(e){
 		openadd('新增职员');
-		$('body').on('click','#add',function(e){
+	});
+	//新增的点击事件
+	$('body').on('click','#add',function(e){
 		var params = {
 				name : $('#ename').val(),
 				sex : $('#selectSex input[name="workersex"]:checked ').attr("sex"),
@@ -38,7 +41,6 @@ function eventInit() {
 		}
 			});
 		});
-	});
 	
 	//删除员工按钮事件
 	$('body').on('click','#delBtn',function(e){
@@ -67,6 +69,7 @@ function eventInit() {
 	//查询员工按钮事件
 	$('body').on('click', '#seachBtn', function(e){
 		name = $('#searchParams').val();
+		page = 1;
 		setData();
 	});
 	
