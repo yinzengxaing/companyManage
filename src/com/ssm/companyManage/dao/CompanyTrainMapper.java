@@ -3,6 +3,8 @@ package com.ssm.companyManage.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+
 /**
  * 职员培训
 * Title: CompanyTrainMapper
@@ -22,7 +24,8 @@ public interface CompanyTrainMapper {
 	 * @throws Exception
 	 */
 	public List<Map<String, Object>> selectAllTrain(Map<String, Object> map) throws Exception;
-	
+	// 添加分页
+	public List<Map<String, Object>> selectAllTrain(Map<String, Object> map, PageBounds pageBounds) throws Exception;
 	/**
 	 * 查询所有的员工的名称
 	 * @param inputObject

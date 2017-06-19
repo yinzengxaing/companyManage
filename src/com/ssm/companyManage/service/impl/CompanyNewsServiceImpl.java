@@ -45,6 +45,9 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 		int totalPage = total/limit; //计算页数
 		if (total%limit != 0)
 			totalPage = totalPage+1;
+		if (total  <= 0){
+			totalPage = 1;
+		}
 		pageMap.put("totalPage",totalPage);
 		outputObject.setBeans(newsList);
 		outputObject.settotal(total);

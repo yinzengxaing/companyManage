@@ -1,5 +1,6 @@
 var searchContent ="";
 var wagesId = "";
+var page = 1; // 默认显示第一页
 
 $(function(){
 	dataInit();
@@ -13,10 +14,14 @@ function dataInit(){
 function wagesInit(){
 	var param = {
 		other:searchContent,
+		page:page,
 	};
 	AjaxPostUtil.request({url:path+"/post/CompanyWagesController/selectAllWages",params:param,type:'json',callback:function(json){
 		if(json.returnCode == 0){
 			// 遍历数据
+			$('#page').html(json.bean.page); // 当前页码
+			$('#totalPage').html(json.bean.totalPage);// 表示一共有多少条数据
+			$('#total').html(json.total); // 表示总条数
 			var source = $("#wagesBean").html();
 			var template = Handlebars.compile(source);
 			$("#wagesList").html(template(json));
@@ -28,7 +33,42 @@ function eventInit(){
 	// 监听查询
 	$("body").on("click", "#searchWages", function(e){
 		searchContent = $("#searchWage").val();
+		page = 1;
 		wagesInit();// 表示一秒后进行刷新
+	});
+	
+	//下一页按钮点击事件
+	$('body').on('click', '#nextPage', function(e){
+		//获取当前页码并且加1
+		var num = $('#page').html();
+		 page = num*1 + 1*1;
+		 if (page > $('#totalPage').html() )
+			 return;
+		wagesInit();
+	});
+	
+	//上一页按钮点击事件
+	$('body').on('click', '#previousPage', function(e){
+		//获取当前页码并且减1
+		var num = $('#page').html();
+		 page = num*1 - 1*1;
+		 if (page <= 0)
+			 return;
+		wagesInit();
+	});
+	
+	//首页按钮点击事件
+	$('body').on('click', '#headerPage', function(e){
+		//获取当前页码并且减1
+		 page = 1;
+		wagesInit();
+	});
+	
+	//尾页按钮点击事件
+	$('body').on('click', '#trailerPage', function(e){
+		//获取当前页码并且减1
+		 page = $('#totalPage').html();
+		wagesInit();
 	});
 	
 	// 监听添加按钮
@@ -47,7 +87,7 @@ function eventInit(){
 	
 	// 监听修改按钮
 	$("body").on("click", "#modifyInfo", function(e){
-		wagesId = $(this).attr("wageId")
+		wagesId = $(this).attr("wageId");
 		var param = {
 			wageId:wagesId,
 		};
@@ -67,7 +107,6 @@ function eventInit(){
 			}
 			
 		});
-		
 		openedt('修改职员薪资信息');
 	});
 	
@@ -93,7 +132,7 @@ function eventInit(){
 				$("#Addclose").click();
 				wagesInit();
 			}else{
-				alert("工资必须为数字！！!");
+				alert(json.returnMessage);
 			}
 		}
 		});
@@ -108,6 +147,7 @@ function eventInit(){
 		var lengYear = $("#wageLengYear").val();
 		var sum = Number(base) + Number(place) + Number(add) + Number(outach) + Number(lengYear);
 		var param= {
+				page:$("#page").html,
 				wageBase : base,
 				wagePlace: place,
 				wageAdd: add,
@@ -120,6 +160,8 @@ function eventInit(){
 			if(json.returnCode == 0){
 				$("#Addclose").click();
 				wagesInit();
+			}else{
+				alert(json.returnMessage);
 			}
 		}
 		});
