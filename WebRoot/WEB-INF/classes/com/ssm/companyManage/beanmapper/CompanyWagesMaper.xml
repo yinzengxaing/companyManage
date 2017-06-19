@@ -74,6 +74,9 @@
 		<if test="wagePlace != null and wagePlace != ''">
 			wagePlace = #{wagePlace},
 		</if>
+		<if test="wageAdd != null and wageAdd !=''">
+			wageAdd=#{wageAdd},
+		</if>
 		<if test="wageOutAch != null and wageOutAch != ''">
 			wageOutAch = #{wageOutAch},
 		</if>
