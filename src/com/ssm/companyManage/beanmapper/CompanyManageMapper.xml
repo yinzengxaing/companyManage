@@ -8,11 +8,11 @@
  <select id="judge" resultType="java.util.Map" parameterType="java.util.Map">
 		 SELECT
 			id,
-			NAME
+			name
 		 FROM
 			company_admin as admin
 		WHERE
-			admin.loginname = #{loginName}
+			admin.loginname = #{username}
 			AND 
 			admin.password = #{password}
  </select>

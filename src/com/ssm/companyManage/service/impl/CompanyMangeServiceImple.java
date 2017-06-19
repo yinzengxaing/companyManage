@@ -25,13 +25,17 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 	 * @param outputObject
 	 * @throws Exception
 	 */
-	public void judge(InputObject inputObject, OutputObject outputObject)
-			throws Exception {
-		Map<String, Object> params = inputObject.getLogParams();
-		System.out.println(params);
-		Map<String, Object> Manage = companyManageMapper.judge(params);
-		System.out.println(Manage);
-		outputObject.setBean(Manage);
+	public void judge(InputObject inputObject, OutputObject outputObject) throws Exception {
+		
+		Map<String, Object> params = inputObject.getParams();
+		Map<String, Object> manage = companyManageMapper.judge(params);
+		if (manage == null){
+			outputObject.setreturnMessage("用户名或密码错误，请重新登录！");
+			return;
+		}else{
+			outputObject.setreturnCode("0");
+			outputObject.setLogParams(manage);
+		}
 	}
 
 	/**
@@ -47,6 +51,16 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 		outputObject.setBean(Manage);
 		
 	}
+
+	public void getAdmin(InputObject inputObject, OutputObject outputObject) throws Exception {
+		
+		Map<String, Object> logParams = inputObject.getLogParams();
+		System.out.println(logParams);
+		outputObject.setBean(logParams);
+		
+	}
+	
+	
 
 	
 

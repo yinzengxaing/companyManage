@@ -42,5 +42,11 @@ public class CompanyManageController {
     	companyManageService.judge(inputObject, outputObject);
     }
     
+    @RequestMapping ("/post/CompanyManageController/getAdmin")
+    @ResponseBody
+    public void getAdmin(InputObject inputObject,OutputObject outputObject) throws Exception{
+    	companyManageService.getAdmin(inputObject, outputObject);
+    }
+    
     
 }

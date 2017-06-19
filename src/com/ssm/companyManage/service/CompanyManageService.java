@@ -13,4 +13,7 @@ public interface CompanyManageService {
 	public void judge(InputObject inputObject,OutputObject outputObject) throws Exception;
 	//根据管理员id 更改帐号密码
 	public void updateLoginnameAndPassword(InputObject inputObject,OutputObject outputObject) throws Exception;
+	//显示用户姓名
+	public void getAdmin(InputObject inputObject ,OutputObject outputObject) throws Exception;
+	
 }
