@@ -51,7 +51,12 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 		outputObject.setBean(Manage);
 		
 	}
-
+	/**
+	 * 得到用户名
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
 	public void getAdmin(InputObject inputObject, OutputObject outputObject) throws Exception {
 		
 		Map<String, Object> logParams = inputObject.getLogParams();
@@ -59,9 +64,4 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 		outputObject.setBean(logParams);
 		
 	}
-	
-	
-
-	
-
 }
