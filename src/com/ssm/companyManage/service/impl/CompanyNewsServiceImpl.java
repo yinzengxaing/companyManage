@@ -54,7 +54,6 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 		
 		if (total%limit != 0)
 			totalPage = totalPage+1;
-		
 		if (total  <= 0){
 			totalPage = 1;
 		}
@@ -77,7 +76,7 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 	 */
 	public void addNews(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-//		Map<String, Object> logParams = inputObject.getLogParams();
+		Map<String, Object> logParams = inputObject.getLogParams();
 
 		String title = params.get("title").toString();
 		String content = params.get("content").toString();
@@ -94,8 +93,7 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 			outputObject.setreturnMessage("您输入的新闻标题已经存在，请重新输入！");
 			return;
 		}
-		
-		params.put("createId","1");
+		params.put("createId",logParams.get("id"));
 		companyNewsMapper.addNews(params);
 	}
 	/**

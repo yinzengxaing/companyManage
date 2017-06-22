@@ -57,6 +57,9 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 		int totalPage = total/limit; //计算页数
 		if (total%limit != 0)
 			totalPage = totalPage+1;
+		if (total  <= 0){
+			totalPage = 1;
+		}
 		//放入登录人的相关信息
 		pageMap.put("userId",logParams.get("id"));
 		pageMap.put("loginpassword",logParams.get("loginpassword"));

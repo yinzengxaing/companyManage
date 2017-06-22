@@ -44,6 +44,7 @@ function eventInit(){
 	
 	// 显示添加的窗口
 	$("body").on("click", "#addTrain", function(){
+		$("#otherInfo").val("");
 		openadd('新增培训');
 	});
 	

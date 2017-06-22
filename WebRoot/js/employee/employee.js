@@ -11,8 +11,14 @@ function dataInit(){
 }
 
 function eventInit() {
-	//保存新的员工按钮事件
+	//保存新的员工按钮事件AddEmployBtn
 	$('body').on('click','#AddEmployBtn',function(e){
+		
+		$("#nvsex").attr("checked",false);
+		$("#nansex").attr("checked","");
+		$("#education option:first").prop("selected", 'selected');
+		$("#duty option:first").prop("selected", 'selected');
+		$("#department option:first").prop("selected", 'selected');
 		openadd('新增职员');
 	});
 	//新增的点击事件
@@ -83,8 +89,10 @@ function eventInit() {
 				//回显姓名
 				$('#ename').val(json.bean.name);
 				if(json.bean.sex == '男'){
+					$("#nvsex").attr("checked",false);
 					$("#nansex").attr("checked","");
 				}else{
+					$("#nansex").attr("checked",false);
 					$("#nvsex").attr("checked","");
 				}
 				//回显生日
