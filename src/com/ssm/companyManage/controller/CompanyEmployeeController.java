@@ -9,9 +9,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyEmployeeService;
-
+/**
+ * 员工信息的相关控制
+* Title: CompanyEmployeeController
+* Description: 
+* Company: 
+* @author administrator
+* @param 
+* @throws 
+* @date 2017-6-19下午4:19:15
+* @version 6.6.6
+ */
 @Controller
 public class CompanyEmployeeController {
+
 	@Resource
 	private CompanyEmployeeService companyEmployeeService;
 	/**

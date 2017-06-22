@@ -6,7 +6,7 @@ import java.util.Map;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 
 /**
- * 薪资Dao
+ * 薪金信息
 * Title: CompanyWagesMapper
 * Description: 
 * Company: 
@@ -14,6 +14,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 * @param 
 * @throws 
 * @date 2017-6-14下午5:56:09
+* @version 6.6.6
  */
 public interface CompanyWagesMapper {
 

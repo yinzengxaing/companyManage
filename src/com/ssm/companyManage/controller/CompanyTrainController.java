@@ -9,7 +9,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyTrainService;
-
+/**
+ * 控制培训信息的跳转
+* Title: CompanyTrainController
+* Description: 
+* Company: 
+* @author administrator
+* @param 
+* @throws 
+* @date 2017-6-19下午4:31:53
+* @version 6.6.6
+ */
 @Controller
 public class CompanyTrainController {
 
@@ -29,7 +39,7 @@ public class CompanyTrainController {
 	}
 	
 	/**
-	 * 
+	 * 通过id显示培训信息
 	 * @param inputObject
 	 * @param outputObject
 	 * @return

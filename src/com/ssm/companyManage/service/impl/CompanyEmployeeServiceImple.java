@@ -19,12 +19,16 @@ import com.ssm.companyManage.util.JudgeUtil;
 
 /**
  * 人员service实现类
- * @author kongliufeng
- *
+* Title: CompanyEmployeeServiceImple
+* Description: 
+* Company: 
+* @author kongliufeng
+* @param 
+* @throws 
+* @date 2017-6-19下午6:35:29
  */
 @Service
 public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
-
 	@Resource
 	private CompanyEmployeeMapper companyEmployeeMapper;
 	@Resource
@@ -65,9 +69,8 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void getEmployeeById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> parmas = inputObject.getParams();
-		System.out.println(parmas);
+		// 通过EmployeeId获得员工信息
 		Map<String, Object> EmployeeById = companyEmployeeMapper.getEmployeeById(parmas);
-		System.out.println(EmployeeById);
 		outputObject.setBean(EmployeeById);
 	}
 	/**
@@ -88,17 +91,19 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 * @throws Exception
 	 */
 	public void addEmployee(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> params = inputObject.getParams();
+		Map<String, Object> params = inputObject.getParams(); // 获取参数
+		
+		// 参数类型转换
 		String name = params.get("name").toString();
 		String sex = params.get("sex").toString();
 		String birthday = params.get("birthday").toString();
 		String phoneNumber = params.get("phoneNumber").toString();
 		String address =params.get("address").toString();
-		
 		String education =params.get("education").toString();
 		String department =params.get("department").toString();
 		String duty =params.get("duty").toString();
 		
+		// 对输入数据进行判断
 		if(JudgeUtil.isNull(name)||JudgeUtil.isNull(sex)||JudgeUtil.isNull(name)||JudgeUtil.isNull(address)||JudgeUtil.isNull(birthday)){
 			outputObject.setreturnMessage("请将信息补充完整!");
 			return;
@@ -112,9 +117,7 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 			outputObject.setreturnMessage("手机号格式有问题");
 			return;
 		}
-		System.out.println(params);
 		companyEmployeeMapper.addEmployee(params);
-
 	}
 	/**
 	 * 删除人员信息
@@ -126,7 +129,6 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 		Map<String, Object> parmas = inputObject.getParams();
 		companyEmployeeMapper.deleteEmployee(parmas);
 		parmas.put("workerId", parmas.get("id"));
-		System.out.println(parmas);
 		companyWagesMapper.deleteById(parmas);
 	}
 	/**
@@ -137,16 +139,17 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void uptadeEmployee(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-		System.out.println(params);
+		
 		String name = params.get("name").toString();
 		String sex = params.get("sex").toString();
 		String birthday = params.get("birthday").toString();
 		String phoneNumber = params.get("phoneNumber").toString();
 		String address =params.get("address").toString();
-		
 		String education =params.get("education").toString();
 		String department =params.get("department").toString();
 		String duty =params.get("duty").toString();
+		
+		// 判断输入数据的合法性
 		if(JudgeUtil.isNull(name)||JudgeUtil.isNull(sex)||JudgeUtil.isNull(name)||JudgeUtil.isNull(address)||JudgeUtil.isNull(birthday)){
 			outputObject.setreturnMessage("请将信息补充完整!");
 			return;
