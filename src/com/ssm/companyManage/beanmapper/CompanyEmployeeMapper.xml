@@ -4,7 +4,6 @@
 <mapper namespace="com.ssm.companyManage.dao.CompanyEmployeeMapper">
 	<!-- 查询Employee -->
 	<select id="getEmployeeList" resultType="java.util.Map" parameterType="java.util.Map">
-	
 		SELECT
 			id,
 			name,
@@ -23,11 +22,11 @@
 				and name like '%${name}%'  
 			</if>
 		</where>
-		
+		order by id desc
 	</select>
 			
-   <!-- 根据员工id 获取所有信息  -->
-   <select id="getEmployeeById" parameterType="java.util.Map" resultType="java.util.Map">
+   	<!-- 根据员工id 获取所有信息  -->
+   	<select id="getEmployeeById" parameterType="java.util.Map" resultType="java.util.Map">
  		SELECT
    			 id,
 			name,
@@ -42,10 +41,10 @@
 			company_employee
 		WHERE
 			id = #{id}
-   </select>
+   	</select>
 
-<!-- 根据员工id 获取所有信息  -->
-   <select id="getEmployeeByName" parameterType="java.util.Map" resultType="java.util.Map">
+	<!-- 根据员名称模糊查询  -->
+   	<select id="getEmployeeByName" parameterType="java.util.Map" resultType="java.util.Map">
  		SELECT
    			id,
 			NAME,
@@ -61,10 +60,11 @@
 			employeeState =1 
 			and 
 			name = #{name}
-   </select>
+		order by id desc
+   	</select>
    
-   <!-- 增加一条员工信息 -->
-   <insert id="addEmployee" parameterType="java.util.Map">
+   	<!-- 增加一条员工信息 -->
+   	<insert id="addEmployee" parameterType="java.util.Map">
    		INSERT INTO company_employee (
 			name,
 			sex,
@@ -85,16 +85,16 @@
 		#{department},
 		#{duty}
 		)
-   </insert>
+   	</insert>
    
-   <!-- 删除一条员工信息 -->
-   <update id="deleteEmployee" parameterType="java.util.Map">
+   	<!-- 删除一条员工信息 -->
+   	<update id="deleteEmployee" parameterType="java.util.Map">
   		 UPDATE company_employee
 		 	SET employeeState = 0
 		 WHERE
 			id = #{id}
-   </update>
-   
+   	</update>
+   	
 	<!-- 修改一条员工信息 -->
 	<update id="uptadeEmployee" parameterType="java.util.Map">
 	UPDATE company_employee

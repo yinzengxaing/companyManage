@@ -3,6 +3,7 @@
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.companyManage.dao.CompanyTrainMapper">
 
+	<!-- 显示所有培训的信息和模糊查询 -->
 	<select id="selectAllTrain" parameterType="java.util.Map" resultType="java.util.Map">
 			SELECT
 				train.trainId AS trainId,
@@ -20,6 +21,7 @@
 		</if>
 	</select>
 	
+	<!-- 通过id进行查询 -->
 	<select id="selectTrainById" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
 			trainTitle,
@@ -32,6 +34,7 @@
 			trainId =#{trainId}
 	</select>
 	
+	<!-- 向数据库中插入一条信息 -->
 	<insert id="insertTrain" parameterType="java.util.Map">
 		INSERT company_train (
 			trainTitle,
@@ -46,6 +49,7 @@
 		)
 	</insert>
 	
+	<!-- 修改培训信息 -->
 	<update id="modifyById" parameterType="java.util.Map">
 		UPDATE 
 			company_train
@@ -64,6 +68,7 @@
 			trainId = #{trainId}
 	</update>
 	
+	<!-- 通过id进行删除 -->
 	<update id="deleteById" parameterType="java.util.Map">
 		UPDATE company_train
 		SET 

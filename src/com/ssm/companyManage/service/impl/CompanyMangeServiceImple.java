@@ -53,7 +53,6 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 		
 	}
 	/**
-	 * 获得 用户信息
 	 * @param inputObject
 	 * @param outputObject
 	 * @throws Exception
@@ -78,9 +77,5 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 		//将session 设置为null
 		session.removeAttribute("admTsyUser");
 	}
-	
-	
-
-	
 
 }

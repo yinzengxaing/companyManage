@@ -15,10 +15,16 @@ import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyNewsService;
 import com.ssm.companyManage.util.JudgeUtil;
+
 /**
  * 处理news 的service 实现类
- * @author yinzengxiang
- *
+* Title: CompanyNewsServiceImpl
+* Description: 
+* Company: 
+* @author yinzengxiang
+* @param 
+* @throws 
+* @date 2017-6-19下午1:14:41
  */
 @Service
 public class CompanyNewsServiceImpl implements CompanyNewsService {
@@ -43,12 +49,16 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 		//保存分页信息的Map
 		Map<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("page", page);
+		
 		int totalPage = total/limit; //计算页数
+		
 		if (total%limit != 0)
 			totalPage = totalPage+1;
+		
 		if (total  <= 0){
 			totalPage = 1;
 		}
+		
 		pageMap.put("totalPage",totalPage);
 		outputObject.setBeans(newsList);
 		outputObject.settotal(total);
@@ -64,10 +74,12 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 	 */
 	public void addNews(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-		Map<String, Object> logParams = inputObject.getLogParams();
+//		Map<String, Object> logParams = inputObject.getLogParams();
+
 		String title = params.get("title").toString();
 		String content = params.get("content").toString();
 		String createTime = params.get("createTime").toString();
+		
 		//判断信息是否完整
 		if (JudgeUtil.isNull(title) || JudgeUtil.isNull(content) || JudgeUtil.isNull(createTime)){
 			outputObject.setreturnMessage("请将信息补充完整!");
@@ -79,6 +91,7 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 			outputObject.setreturnMessage("您输入的新闻标题已经存在，请重新输入！");
 			return;
 		}
+		
 		params.put("createId","1");
 		companyNewsMapper.addNews(params);
 	}
@@ -101,10 +114,12 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 	 */
 	public void updateNews(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
+		
 		String title = params.get("title").toString();
 		String content = params.get("content").toString();
 		String createTime = params.get("createTime").toString();
 		String id = params.get("id").toString();
+		
 		//判断信息是否完整
 		if (JudgeUtil.isNull(title) || JudgeUtil.isNull(content) || JudgeUtil.isNull(createTime)){
 			outputObject.setreturnMessage("请将信息补充完整!");

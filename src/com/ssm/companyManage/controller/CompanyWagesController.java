@@ -9,7 +9,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyWagesService;
-
+/**
+ * 控制薪金信息的跳转
+* Title: CompanyWagesController
+* Description: 
+* Company: 
+* @author administrator
+* @param 
+* @throws 
+* @date 2017-6-19下午4:34:19
+* @version 6.6.6
+ */
 @Controller
 public class CompanyWagesController {
 
@@ -39,7 +49,7 @@ public class CompanyWagesController {
 		companyWagesService.selectById(inputObject, outputObject);
 	}
 	/**
-	 * 插入数据
+	 * 插入薪金信息
 	 * @param inputObject
 	 * @param outputObject
 	 * @throws Exception
