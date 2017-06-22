@@ -24,8 +24,7 @@
 		UPDATE
 		 	 company_admin
 		<set>
-			loginname = #{loginName} ,
-            password = #{password}
+            loginpassword = #{password}
 		</set>
 	    WHERE
 	       id = #{id}

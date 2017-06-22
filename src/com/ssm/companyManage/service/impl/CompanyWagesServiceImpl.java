@@ -42,6 +42,7 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 	//companyWagesMapper.selectAllWages(map, new PageBounds(page, limit));
 	public void selectAllWages(InputObject inputObject , OutputObject outputObject) throws Exception{
 		Map<String, Object> params = inputObject.getParams();
+		Map<String, Object> logParams = inputObject.getLogParams();
 		//进行分页
 		int page =Integer.parseInt(params.get("page").toString()); //当前页；
 		int limit = 10; //定义每一页条数
@@ -58,6 +59,10 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 		if (total  <= 0){
 			totalPage = 1;
 		}
+		//放入登录人的相关信息
+		pageMap.put("userId",logParams.get("id"));
+		pageMap.put("loginpassword",logParams.get("loginpassword"));
+		pageMap.put("loginname",logParams.get("loginname"));
 		pageMap.put("totalPage",totalPage);
 		outputObject.setBeans(newsList);
 		outputObject.settotal(total);

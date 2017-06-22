@@ -39,6 +39,7 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 	 */
 	public void selectAllTrain(InputObject inputObject,	OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
+		Map<String, Object> logParams = inputObject.getLogParams();
 		// 进行分页
 		int page = Integer.parseInt(map.get("page").toString());
 		int limit = 10 ; // 定义每一页的条数
@@ -56,6 +57,10 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 		if (total  <= 0){
 			totalPage = 1;
 		}
+		//放入登录人的相关信息
+		pageMap.put("userId",logParams.get("id"));
+		pageMap.put("loginpassword",logParams.get("loginpassword"));
+		pageMap.put("loginname",logParams.get("loginname"));
 		pageMap.put("totalPage", totalPage);
 		outputObject.setBean(pageMap);
 		outputObject.setBeans(list);

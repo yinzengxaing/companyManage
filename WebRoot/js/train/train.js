@@ -22,6 +22,12 @@ function trainInit(){
 			$("#page").html(json.bean.page);
 			$("#totalPage").html(json.bean.totalPage);
 			$("#total").html(json.total);
+			//设置当前登录人信息
+			$('#loginUser').html(json.bean.loginname);
+			$('#edtAdmin').attr("userId",json.bean.userId);
+			$('#loginpassword').val(json.bean.loginpassword);
+			$('#loginname').val(json.bean.loginname);
+			
 			var source = $("#trainBean").html();
 			var template = Handlebars.compile(source);
 			$("#trainList").html(template(json));
@@ -38,6 +44,7 @@ function eventInit(){
 	
 	// 显示添加的窗口
 	$("body").on("click", "#addTrain", function(){
+		$("#otherInfo").val("");
 		openadd('新增培训');
 	});
 	
@@ -151,5 +158,28 @@ function eventInit(){
 		//获取当前页码并且减1
 		 page = $('#totalPage').html();
 		trainInit();
+	});
+	
+	//退出登录按钮单击相应事件
+	$('body').on('click', '#escBtn', function(e){
+		AjaxPostUtil.request({url:path+"/post/CompanyManageController/escAdmin",params:{},type:'json',callback:function(json){
+			window.location.href = "manage.html";
+		}
+		});
+	});
+	
+	//修改按钮点击事件
+	$('body').on('click', '#edtAdmin', function(e){
+		var params = {
+				id:	$('#edtAdmin').attr("userid"),
+				password : $("#loginpassword").val()
+		}
+		AjaxPostUtil.request({url:path+"/post/CompanyManageController/updateLoginnameAndPassword",params:params,type:'json',callback:function(json){
+			if (json.returnCode == 0){
+				alert("密码已经更改，请重新登录");
+				window.location.href = "manage.html";
+			}
+		}
+		});
 	});
 }

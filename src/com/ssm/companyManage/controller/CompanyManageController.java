@@ -39,13 +39,7 @@ public class CompanyManageController {
     @RequestMapping("/post/CompanyManageController/updateLoginnameAndPassword")
    	@ResponseBody
    	public void updateLoginnameAndPassword(InputObject inputObject,OutputObject outputObject) throws Exception{
-    	companyManageService.judge(inputObject, outputObject);
-    }
-    
-    @RequestMapping ("/post/CompanyManageController/getAdmin")
-    @ResponseBody
-    public void getAdmin(InputObject inputObject,OutputObject outputObject) throws Exception{
-    	companyManageService.getAdmin(inputObject, outputObject);
+    	companyManageService.updateLoginnameAndPassword(inputObject, outputObject);
     }
     
     /**
