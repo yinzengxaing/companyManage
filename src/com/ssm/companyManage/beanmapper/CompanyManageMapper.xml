@@ -8,18 +8,19 @@
  <select id="judge" resultType="java.util.Map" parameterType="java.util.Map">
 		 SELECT
 			id,
-			name
+			loginname,
+			loginpassword 
 		 FROM
-			company_admin as admin
+			company_admin
 		WHERE
-			admin.loginname = #{username}
+			loginname = #{username}
 			AND 
-			admin.password = #{password}
+			loginpassword = #{password}
  </select>
  
  
  <!-- 更改管理员帐号密码 -->
- <update id="updateLoginnameAndPassword">
+ <update id="updateLoginnameAndPassword" parameterType="java.util.Map">
 		UPDATE
 		 	 company_admin
 		<set>

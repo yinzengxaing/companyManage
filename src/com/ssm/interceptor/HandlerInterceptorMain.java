@@ -32,9 +32,12 @@ public class HandlerInterceptorMain implements HandlerInterceptor{
 		response.setCharacterEncoding("UTF-8");
 		String url = servletRequest.getContextPath() + servletRequest.getServletPath();
 		Map<String,Object> user = InputObject.getLogInParams();
-//		if (user == null && !JudgeUtil.contains(URL,url)) {
-//			throw new CustomException("您还未登录,请先登录");
-//		}
+		//&& !JudgeUtil.contains(URL,url)
+/*		System.out.println(user);
+		if (user == null ) {
+			System.out.println("您还没有登录，请先登录");
+			throw new CustomException("您还未登录,请先登录");
+		}*/
     	if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")){
         	//如果是ajax请求响应头会有x-requested-with
     		return true;

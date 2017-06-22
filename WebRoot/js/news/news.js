@@ -147,6 +147,16 @@ function eventInit(){
 		 page = $('#totalPage').html();
 		setData();
 	});
+	
+	//退出登录按钮单击相应事件
+	$('body').on('click', '#escBtn', function(e){
+		//获取当前页码并且减1
+		AjaxPostUtil.request({url:path+"/post/CompanyManageController/escAdmin",params:{},type:'json',callback:function(json){
+			window.location.href = "manage.html";
+		}
+		});
+	});
+	
 }
 //初始化数据
 function setData(){
