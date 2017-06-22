@@ -4,12 +4,10 @@ var page = 1;//默认显示第一页
 $(function(e){
 	dataInit();
 });
-
-
-
 function dataInit(){
-	setData();	
+	setData();
 	eventInit();
+	
 }
 
 function eventInit() {

@@ -30,7 +30,8 @@ public class CompanyWagesServiceImpl implements CompanyWagesService{
 
 	@Resource
 	CompanyWagesMapper companyWagesMapper;
-	private String regx = "[1-9]?[0-9]*(\\.[0-9]{1,2})?";
+	// 判断输入工资的格式是否正确
+	private String regx = "[1-9]?[0-9]*(\\.[0-9]{1,2})?"; 
 	
 	/**
 	 * 显示多有和通过条件模糊查询

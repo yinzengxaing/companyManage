@@ -48,5 +48,17 @@ public class CompanyManageController {
     	companyManageService.getAdmin(inputObject, outputObject);
     }
     
+    /**
+     * 退出用户
+     * @param inputObject
+     * @param outputObject
+     * @throws Exception
+     */
+    @RequestMapping ("/post/CompanyManageController/escAdmin")
+    @ResponseBody
+    public void escAdmin(InputObject inputObject,OutputObject outputObject)throws Exception{
+    	companyManageService.escAdmin(inputObject, outputObject);
+    }
+    
     
 }

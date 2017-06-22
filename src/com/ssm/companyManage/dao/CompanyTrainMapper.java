@@ -14,6 +14,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 * @param 
 * @throws 
 * @date 2017-6-16上午8:31:29
+* @version 6.6.6
  */
 public interface CompanyTrainMapper {
 	/**

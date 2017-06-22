@@ -9,7 +9,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
 import com.ssm.companyManage.service.CompanyNewsService;
-
+/**
+ * 新闻公告的信息的控制
+* Title: CompanyNewsController
+* Description: 
+* Company: 
+* @author administrator
+* @param 
+* @throws 
+* @date 2017-6-19下午4:24:27
+* @version 6.6.6
+ */
 @Controller
 public class CompanyNewsController {
 	

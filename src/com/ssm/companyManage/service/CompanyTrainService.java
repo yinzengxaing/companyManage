@@ -3,7 +3,16 @@ package com.ssm.companyManage.service;
 
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
-
+/**
+ * 
+* Title: CompanyTrainService
+* Description: 
+* Company: 
+* @author administrator
+* @param 
+* @throws 
+* @date 2017-6-16下午8:04:34
+ */
 public interface CompanyTrainService {
 
 	/**

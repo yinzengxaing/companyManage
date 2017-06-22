@@ -83,10 +83,12 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 	 */
 	public void insertTrain(InputObject inputObject, OutputObject outputObject)	throws Exception {
 		Map<String, Object> map = inputObject.getParams();
+		
 		String 	trainTitle = map.get("trainTitle").toString();
 		String trainLecturer = map.get("trainLecturer").toString();
 		String trainTime = map.get("trainTime").toString();
 		String other = map.get("other").toString();
+		
 		if(JudgeUtil.isNull(trainTitle)){
 			outputObject.setreturnMessage("标题不能为空！！！");
 			return;
@@ -114,10 +116,12 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 	 */
 	public void modifyById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> map = inputObject.getParams();
+		
 		String 	trainTitle = map.get("trainTitle").toString();
 		String trainLecturer = map.get("trainLecturer").toString();
 		String trainTime = map.get("trainTime").toString();
 		String other = map.get("other").toString();
+		
 		if(JudgeUtil.isNull(trainTitle)){
 			outputObject.setreturnMessage("标题不能为空！！！");
 			return;
@@ -147,5 +151,4 @@ public class CompanyTrainServiceImpl implements CompanyTrainService{
 		Map<String, Object> map = inputObject.getParams();
 		companyTrainMapper.deleteById(map);
 	}
-
 }

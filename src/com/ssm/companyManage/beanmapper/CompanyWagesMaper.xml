@@ -27,6 +27,7 @@
 		ORDER BY employee.id ASC
 	</select>
 	
+	<!-- 通过id查询薪金信息 -->
 	<select id="selectById" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
 			employee.`name` AS workerName,
@@ -43,6 +44,8 @@
 		AND employee.employeeState = 1
 		AND wages.wageId = #{wageId}
 	</select>
+	
+	<!-- 添加薪金信息 -->
 	<insert id="insertWages" parameterType="java.util.Map">
 		INSERT company_wages (
 			workerid,
@@ -64,6 +67,7 @@
 		)
 	</insert>
 
+	<!-- 修改薪金信息 -->
 	<update id="modifyWages" parameterType="java.util.Map">
 		UPDATE 
 			company_wages
@@ -88,6 +92,7 @@
 			wageId = #{wageId}
 	</update>
 	
+	<!-- 通过id进行删除 -->
 	<update id="deleteById" parameterType="java.util.Map">
 		update
 			company_wages

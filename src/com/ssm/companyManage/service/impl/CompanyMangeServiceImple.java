@@ -2,12 +2,15 @@ package com.ssm.companyManage.service.impl;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
 import com.ssm.companyManage.dao.CompanyManageMapper;
 import com.ssm.companyManage.object.InputObject;
 import com.ssm.companyManage.object.OutputObject;
+import com.ssm.companyManage.object.PutObject;
 import com.ssm.companyManage.service.CompanyManageService;
 /**
  * 管理员service实现类
@@ -26,7 +29,6 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 	 * @throws Exception
 	 */
 	public void judge(InputObject inputObject, OutputObject outputObject) throws Exception {
-		
 		Map<String, Object> params = inputObject.getParams();
 		Map<String, Object> manage = companyManageMapper.judge(params);
 		if (manage == null){
@@ -44,24 +46,36 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 	 * @param outputObject
 	 * @throws Exception
 	 */
-	public void updateLoginnameAndPassword(InputObject inputObject,
-			OutputObject outputObject) throws Exception {
+	public void updateLoginnameAndPassword(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getLogParams();
 		Map<String, Object>  Manage = companyManageMapper.updateLoginnameAndPassword(params);
 		outputObject.setBean(Manage);
 		
 	}
-
+	/**
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
 	public void getAdmin(InputObject inputObject, OutputObject outputObject) throws Exception {
-		
 		Map<String, Object> logParams = inputObject.getLogParams();
 		System.out.println(logParams);
 		outputObject.setBean(logParams);
 		
 	}
-	
-	
 
-	
+	/**
+	 * 退出用户
+	 * @param inputObject
+	 * @param outputObject
+	 * @throws Exception
+	 */
+	public void escAdmin(InputObject inputObject, OutputObject outputObject) throws Exception {
+		
+		HttpServletRequest request = PutObject.getRequest();
+		HttpSession session = request.getSession();
+		//将session 设置为null
+		session.removeAttribute("admTsyUser");
+	}
 
 }
