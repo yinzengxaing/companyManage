@@ -68,7 +68,7 @@
 						<div class="row-fluid">
 							<div class="add">
 								<a class="btn btn-success" id="AddEmployBtn">新增</a>
-								<a class="btn btn-success" id="btnPrint">打印</a>
+								<a class="btn btn-success" id="printed">打印</a>
 							</div>
 							<div class="page">
 								<a href="#" id="headerPage"><img src="../images/08.png" title="首页"/></a>
@@ -82,7 +82,10 @@
 								<input type="text" placeholder="Search" class="seartext" id="searchParams"/>
 								<a class="btn btn-success" id="seachBtn">搜索</a>
 							</div>
-							<div class="w">
+							<div class="w" id="printModal">
+								<center>
+									<h3>员工信息详表</h3>
+								</center>
 								<div class="span12">
 									<table class="table table-condensed table-bordered table-hover tab">
 										<thead>
@@ -250,7 +253,7 @@
 		<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
 <!-- 		<script type="text/javascript" src="../../js/manage/updateManage.js"></script> -->
 		<script type="text/javascript" src="../../js/employee/employee.js"></script>
-		
+		<script type="text/javascript" src="../../js/printFile/printFile.js"></script>
 		<script type="text/javascript">
 			laydate({
 				elem: '#birthday'
