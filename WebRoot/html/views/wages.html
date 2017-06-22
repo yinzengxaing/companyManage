@@ -69,7 +69,7 @@
 						<div class="row-fluid">
 							<div class="add">
 								<a class="btn btn-success" id="addWageBtn" >新增</a>
-								<a class="btn btn-success">打印</a>
+								<a class="btn btn-success" id="printed">打印</a>
 							</div>
 							<div class="page">
 								<a href="#" id="headerPage"><img src="../images/08.png" title="首页"/></a>
@@ -83,7 +83,10 @@
 								<input type="text" placeholder="Search" class="seartext" id="searchWage"/>
 								<a class="btn btn-success" id="searchWages">搜索</a>
 							</div>
-							<div class="w">
+							<div class="w" id="printModal">
+								<center>
+									<h3>员工工资详表</h3>
+								</center>
 								<div class="span12">
 									<table class="table table-condensed table-bordered table-hover tab">
 										<thead>
@@ -225,8 +228,8 @@
 		
 		<script type="text/javascript" src="../../js/util/main.js"></script>
 		<script type="text/javascript" src="../../js/util/handlebars-v4.0.5.js"></script>
-<!-- 		<script type="text/javascript" src="../../js/manage/updateManage.js"></script> -->
 		<script src="../../js/wages/wage.js"></script>
+		<script type="text/javascript" src="../../js/printFile/printFile.js"></script>
 	</body>
 
 </html>
