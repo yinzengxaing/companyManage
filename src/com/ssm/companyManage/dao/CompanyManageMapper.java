@@ -11,6 +11,6 @@ public interface CompanyManageMapper {
 	public Map<String, Object>  judge(Map<String , Object> map) throws Exception;
 
 	//根据管理员id 更改帐号密码
-	public Map<String, Object> updateLoginnameAndPassword(Map<String, Object> map) throws Exception;
+	public void  updateLoginnameAndPassword(Map<String, Object> map) throws Exception;
 
 }

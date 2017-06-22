@@ -47,10 +47,12 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 	 * @throws Exception
 	 */
 	public void updateLoginnameAndPassword(InputObject inputObject, OutputObject outputObject) throws Exception {
-		Map<String, Object> params = inputObject.getLogParams();
-		Map<String, Object>  Manage = companyManageMapper.updateLoginnameAndPassword(params);
-		outputObject.setBean(Manage);
-		
+		Map<String, Object> params = inputObject.getParams();
+		companyManageMapper.updateLoginnameAndPassword(params);
+		HttpServletRequest request = PutObject.getRequest();
+		HttpSession session = request.getSession();
+		//将session 设置为null
+		session.removeAttribute("admTsyUser");
 	}
 	/**
 	 * @param inputObject
@@ -59,7 +61,6 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 	 */
 	public void getAdmin(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> logParams = inputObject.getLogParams();
-		System.out.println(logParams);
 		outputObject.setBean(logParams);
 		
 	}
@@ -76,6 +77,7 @@ public class CompanyMangeServiceImple implements CompanyManageService {
 		HttpSession session = request.getSession();
 		//将session 设置为null
 		session.removeAttribute("admTsyUser");
+		
 	}
 
 }

@@ -41,6 +41,7 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void getEmployeeList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
+		Map<String, Object> logParams = inputObject.getLogParams();
 		//进行分页
 		int page =Integer.parseInt(params.get("page").toString()); //当前页；
 		int limit = 10; //定义每一页条数
@@ -56,6 +57,10 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 		int totalPage = total/limit; //计算页数
 		if (total%limit != 0)
 			totalPage = totalPage+1;
+		//放入登录人的相关信息
+		pageMap.put("userId",logParams.get("id"));
+		pageMap.put("loginpassword",logParams.get("loginpassword"));
+		pageMap.put("loginname",logParams.get("loginname"));
 		pageMap.put("totalPage",totalPage);
 		outputObject.setBeans(employeeList);
 		outputObject.settotal(total);

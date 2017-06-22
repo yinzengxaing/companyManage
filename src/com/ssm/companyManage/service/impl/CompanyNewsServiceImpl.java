@@ -58,7 +58,10 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 		if (total  <= 0){
 			totalPage = 1;
 		}
-		
+		//放入登录人的相关信息
+		pageMap.put("userId",logParams.get("id"));
+		pageMap.put("loginpassword",logParams.get("loginpassword"));
+		pageMap.put("loginname",logParams.get("loginname"));
 		pageMap.put("totalPage",totalPage);
 		outputObject.setBeans(newsList);
 		outputObject.settotal(total);

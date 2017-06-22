@@ -22,6 +22,11 @@ function wagesInit(){
 			$('#page').html(json.bean.page); // 当前页码
 			$('#totalPage').html(json.bean.totalPage);// 表示一共有多少条数据
 			$('#total').html(json.total); // 表示总条数
+			//设置当前登录人信息
+			$('#loginUser').html(json.bean.loginname);
+			$('#edtAdmin').attr("userId",json.bean.userId);
+			$('#loginpassword').val(json.bean.loginpassword);
+			$('#loginname').val(json.bean.loginname);
 			var source = $("#wagesBean").html();
 			var template = Handlebars.compile(source);
 			$("#wagesList").html(template(json));
@@ -162,6 +167,29 @@ function eventInit(){
 				wagesInit();
 			}else{
 				alert(json.returnMessage);
+			}
+		}
+		});
+	});
+	
+	//退出登录按钮单击相应事件
+	$('body').on('click', '#escBtn', function(e){
+		AjaxPostUtil.request({url:path+"/post/CompanyManageController/escAdmin",params:{},type:'json',callback:function(json){
+			window.location.href = "manage.html";
+		}
+		});
+	});
+	
+	//修改按钮点击事件
+	$('body').on('click', '#edtAdmin', function(e){
+		var params = {
+				id:	$('#edtAdmin').attr("userid"),
+				password : $("#loginpassword").val()
+		}
+		AjaxPostUtil.request({url:path+"/post/CompanyManageController/updateLoginnameAndPassword",params:params,type:'json',callback:function(json){
+			if (json.returnCode == 0){
+				alert("密码已经更改，请重新登录");
+				window.location.href = "manage.html";
 			}
 		}
 		});
