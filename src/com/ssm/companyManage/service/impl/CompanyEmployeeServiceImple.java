@@ -65,9 +65,7 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void getEmployeeById(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> parmas = inputObject.getParams();
-		System.out.println(parmas);
 		Map<String, Object> EmployeeById = companyEmployeeMapper.getEmployeeById(parmas);
-		System.out.println(EmployeeById);
 		outputObject.setBean(EmployeeById);
 	}
 	/**
@@ -112,7 +110,6 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 			outputObject.setreturnMessage("手机号格式有问题");
 			return;
 		}
-		System.out.println(params);
 		companyEmployeeMapper.addEmployee(params);
 
 	}
@@ -126,7 +123,6 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 		Map<String, Object> parmas = inputObject.getParams();
 		companyEmployeeMapper.deleteEmployee(parmas);
 		parmas.put("workerId", parmas.get("id"));
-		System.out.println(parmas);
 		companyWagesMapper.deleteById(parmas);
 	}
 	/**
@@ -137,7 +133,6 @@ public class CompanyEmployeeServiceImple implements CompanyEmployeeService {
 	 */
 	public void uptadeEmployee(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
-		System.out.println(params);
 		String name = params.get("name").toString();
 		String sex = params.get("sex").toString();
 		String birthday = params.get("birthday").toString();

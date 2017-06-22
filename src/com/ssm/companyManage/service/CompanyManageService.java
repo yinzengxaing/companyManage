@@ -15,5 +15,6 @@ public interface CompanyManageService {
 	public void updateLoginnameAndPassword(InputObject inputObject,OutputObject outputObject) throws Exception;
 	//显示用户姓名
 	public void getAdmin(InputObject inputObject ,OutputObject outputObject) throws Exception;
-	
+	//退出用户
+	public void escAdmin(InputObject inputObject ,OutputObject outputObject)throws Exception;
 }

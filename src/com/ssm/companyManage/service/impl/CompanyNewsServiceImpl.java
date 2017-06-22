@@ -32,6 +32,7 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 	 */
 	public void getNewsList(InputObject inputObject, OutputObject outputObject) throws Exception {
 		Map<String, Object> params = inputObject.getParams();
+		Map<String, Object> logParams = inputObject.getLogParams();
 		//进行分页
 		int page =Integer.parseInt(params.get("page").toString()); //当前页；
 		int limit = 10; //定义每一页条数
@@ -52,6 +53,7 @@ public class CompanyNewsServiceImpl implements CompanyNewsService {
 		outputObject.setBeans(newsList);
 		outputObject.settotal(total);
 		outputObject.setBean(pageMap);
+		
 	}
 
 	/**
