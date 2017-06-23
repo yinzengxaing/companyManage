@@ -8,7 +8,7 @@ import com.ssm.companyManage.object.OutputObject;
 * Title: CompanyTrainService
 * Description: 
 * Company: 
-* @author administrator
+* @author zhangtaoxiang
 * @param 
 * @throws 
 * @date 2017-6-16下午8:04:34
