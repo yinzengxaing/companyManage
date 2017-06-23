@@ -16,8 +16,11 @@
 			WHERE
 				train.state = 1
 		<if test="other != null and other != ''">
-			AND train.other LIKE "%${other}%"
-			AND train.trainTitle LIKE "%${other}%"
+			AND (
+				train.other LIKE "%${other}%"
+				or 
+				train.trainTitle LIKE "%${other}%"
+				)
 		</if>
 	</select>
 	
